@@ -1,0 +1,140 @@
+{
+  "_source": "https://ifrcgo.org/monty-stac-extension/model/taxonomy/#2025-update",
+  "impact_types": [
+    {"code": "death",              "label": "Death",                                                         "group": "fatalities"},
+    {"code": "missing",            "label": "Missing",                                                       "group": "fatalities"},
+    {"code": "injured",            "label": "Injured",                                                       "group": "fatalities"},
+    {"code": "displaced_total",    "label": "Displaced Persons (Internal & External)",                       "group": "displacement"},
+    {"code": "displaced_internal", "label": "Internally Displaced Persons (IDPs)",                          "group": "displacement"},
+    {"code": "displaced_external", "label": "Refugees, Asylum Seekers and Externally Displaced Persons",    "group": "displacement"},
+    {"code": "evacuated",          "label": "Evacuated",                                                     "group": "displacement"},
+    {"code": "relocated",          "label": "Relocated",                                                     "group": "displacement"},
+    {"code": "homeless",           "label": "Homeless",                                                      "group": "displacement"},
+    {"code": "affected_total",     "label": "Total Affected",                                                "group": "affected_people"},
+    {"code": "affected_direct",    "label": "Directly Affected",                                             "group": "affected_people"},
+    {"code": "affected_indirect",  "label": "Indirectly Affected",                                           "group": "affected_people"},
+    {"code": "potentially_affected","label": "Potentially Affected",                                         "group": "affected_people"},
+    {"code": "unaffected",         "label": "Unaffected",                                                    "group": "affected_people"},
+    {"code": "assisted",           "label": "Assisted (Received Aid/Support)",                               "group": "humanitarian_response"},
+    {"code": "in_need",            "label": "In Need",                                                       "group": "humanitarian_response"},
+    {"code": "targeted",           "label": "Targeted",                                                      "group": "humanitarian_response"},
+    {"code": "shelter_emergency",  "label": "Emergency Sheltered",                                           "group": "humanitarian_response"},
+    {"code": "shelter_temporary",  "label": "Temporary Accommodated",                                        "group": "humanitarian_response"},
+    {"code": "shelter_longterm",   "label": "Long-Term Accommodated",                                        "group": "humanitarian_response"},
+    {"code": "damaged",            "label": "Damaged",                                                       "group": "physical_damage"},
+    {"code": "destroyed",          "label": "Destroyed",                                                     "group": "physical_damage"},
+    {"code": "potentially_damaged","label": "Potentially Damaged",                                           "group": "physical_damage"},
+    {"code": "disrupted",          "label": "Disrupted",                                                     "group": "physical_damage"},
+    {"code": "cost",               "label": "Loss (Cost)",                                                   "group": "financial"},
+    {"code": "alertscore",         "label": "Alertscore",                                                    "group": "other"},
+    {"code": "highest_risk",       "label": "Highest Risk",                                                  "group": "other"},
+    {"code": "unspecified",        "label": "Unspecified",                                                   "group": "other"}
+  ],
+  "hazard_codes": [
+    {
+      "undrr": "MH0600", "glide": "FL", "name": "Flood (general/riverine)",
+      "synonyms": ["flood", "flooding", "inundation", "riverine flood"],
+      "emdat": ["nat-hyd-flo-flo", "nat-hyd-flo-riv"]
+    },
+    {
+      "undrr": "MH0603", "glide": "FF", "name": "Flash flood",
+      "synonyms": ["flash flood", "flash flooding", "pluvial", "surface water flood", "rapid onset flood"],
+      "emdat": ["nat-hyd-flo-fla"]
+    },
+    {
+      "undrr": "MH0601", "glide": "FL", "name": "Coastal flood",
+      "synonyms": ["coastal flood", "storm surge", "sea flood", "tidal flood"],
+      "emdat": ["nat-hyd-flo-flo"]
+    },
+    {
+      "undrr": "MH0602", "glide": "FL", "name": "Urban flood",
+      "synonyms": ["urban flood", "city flood"],
+      "emdat": []
+    },
+    {
+      "undrr": "MH0309", "glide": "TC", "name": "Tropical cyclone",
+      "synonyms": ["cyclone", "typhoon", "hurricane", "tropical storm", "tc"],
+      "emdat": ["nat-met-sto-tro"]
+    },
+    {
+      "undrr": "MH0101", "glide": "ST", "name": "Severe storm / convective",
+      "synonyms": ["storm", "severe storm", "thunderstorm", "hailstorm", "lightning", "tornado", "downburst"],
+      "emdat": ["nat-met-sto-sev", "nat-met-sto-sto", "nat-met-sto-tor", "nat-met-sto-lig", "nat-met-sto-san"]
+    },
+    {
+      "undrr": "MH0103", "glide": "ST", "name": "Extra-tropical storm",
+      "synonyms": ["extratropical storm", "winter storm", "blizzard", "nor'easter"],
+      "emdat": ["nat-met-sto-bli"]
+    },
+    {
+      "undrr": "GH0001", "glide": "EQ", "name": "Earthquake",
+      "synonyms": ["earthquake", "quake", "seismic", "tremor", "eq"],
+      "emdat": ["nat-geo-ear-gro"]
+    },
+    {
+      "undrr": "GH0101", "glide": "VO", "name": "Volcanic eruption",
+      "synonyms": ["volcano", "volcanic", "eruption", "lava", "ash cloud"],
+      "emdat": ["nat-geo-vol-ash", "nat-geo-vol-pyr"]
+    },
+    {
+      "undrr": "GH0200", "glide": "LS", "name": "Landslide / mass movement",
+      "synonyms": ["landslide", "mudslide", "rockslide", "avalanche", "debris flow", "mass movement"],
+      "emdat": ["nat-hyd-mmw-lan", "nat-hyd-mmw-mud"]
+    },
+    {
+      "undrr": "MH0400", "glide": "DR", "name": "Drought",
+      "synonyms": ["drought", "dry spell", "water scarcity", "desiccation"],
+      "emdat": ["nat-cli-dro-dro"]
+    },
+    {
+      "undrr": "MH0800", "glide": "WF", "name": "Wildfire",
+      "synonyms": ["wildfire", "forest fire", "bushfire", "brush fire"],
+      "emdat": ["nat-cli-wil-wil", "nat-cli-wil-for"]
+    },
+    {
+      "undrr": "MH0500", "glide": "EP", "name": "Extreme temperature",
+      "synonyms": ["heatwave", "heat wave", "extreme heat", "cold wave", "freeze", "frost"],
+      "emdat": ["nat-met-ext-sev"]
+    },
+    {
+      "undrr": "MH0300", "glide": "HU", "name": "Hailstorm",
+      "synonyms": ["hail", "hailstorm"],
+      "emdat": []
+    },
+    {
+      "undrr": "GH0300", "glide": "TS", "name": "Tsunami",
+      "synonyms": ["tsunami", "tidal wave"],
+      "emdat": ["nat-geo-ear-tsu"]
+    },
+    {
+      "undrr": "EN0205", "glide": "AC", "name": "Accident / technological",
+      "synonyms": ["accident", "industrial accident", "chemical spill", "oil spill", "explosion"],
+      "emdat": ["tec-ind-exp-exp", "tec-ind-fir-fir", "tec-ind-col-col", "tec-mis-exp-exp", "tec-mis-fir-fir", "tec-mis-col-col"]
+    },
+    {
+      "undrr": "TL0048", "glide": "AC", "name": "Road transport accident",
+      "synonyms": ["road accident", "traffic accident", "vehicle crash"],
+      "emdat": ["tec-tra-roa-roa"]
+    },
+    {
+      "undrr": "TL0049", "glide": "AC", "name": "Water transport accident",
+      "synonyms": ["boat accident", "ship accident", "maritime accident"],
+      "emdat": ["tec-tra-wat-wat"]
+    },
+    {
+      "undrr": "TL0051", "glide": "AC", "name": "Air transport accident",
+      "synonyms": ["plane crash", "air accident", "aviation accident"],
+      "emdat": ["tec-tra-air-air"]
+    },
+    {
+      "undrr": "TL0052", "glide": "AC", "name": "Rail transport accident",
+      "synonyms": ["train accident", "rail accident"],
+      "emdat": ["tec-tra-rai-rai"]
+    },
+    {
+      "undrr": "GH0311", "glide": "EQ", "name": "Earthquake (shallow)",
+      "synonyms": ["shallow earthquake"],
+      "emdat": []
+    }
+  ]
+}
