@@ -2,7 +2,12 @@
 name = "montandon-skills"
 version = "0.1.0"
 requires-python = ">=3.11"
-dependencies = ["requests>=2.32"]
+dependencies = [
+    "geodatasets>=2026.5.1",
+    "geopandas>=1.1.3",
+    "matplotlib>=3.10.9",
+    "requests>=2.32",
+]
 
 [dependency-groups]
 dev = []
