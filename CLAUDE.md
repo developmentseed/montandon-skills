@@ -49,10 +49,25 @@ from skills.hazard_codes import hazard_codes
 - Cross-source deduplication is in progress (earthquakes/floods piloted); same event may appear once per source
 - Always tell the user which source(s) and hazard code you used
 
+## Query strategy
+
+**Always query all relevant sources — never restrict to a single source unless the user explicitly asks.**
+
+Different sources capture different aspects:
+- `emdat` — deaths, affected, economic loss (historical)
+- `idmc-gidd` / `idmc-idu` — displacement counts (often higher than emdat)
+- `ifrcevent` — IFRC Emergency Appeal scale and response
+- `glide` — cross-source linkage, useful for finding all records of the same event
+- `gdacs` / `pdc` — near-real-time; useful for recent events
+- `desinventar` — local/sub-national detail for Latin America, South Asia
+
+Omitting sources silently understates impact. If you must limit scope for performance, tell the user which sources you queried and which you skipped.
+
 ## Response guidelines
 
 - If results are empty or sparse, say so explicitly — don't speculate about real-world events
 - Group impact rows by type (deaths, displaced, cost) as a summary per event
+- Always state which sources were queried — the user cannot see your code
 - Offer next steps after showing results (filter by country, drill into an event, try another source)
 
 ## Environment
