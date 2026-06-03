@@ -23,8 +23,8 @@ def search_impacts(
     country_code: str | None = None,
     country_codes: list[str] | None = None,
     sources: list[str] | None = None,
-    limit: int = 10,
-) -> list[dict]:
+    limit: int = 50,
+) -> dict:
     """
     Search for events meeting impact thresholds (deaths, displaced, etc.).
 
@@ -43,8 +43,11 @@ def search_impacts(
         limit:          Max results (default 10, max ~100). Each row is one impact-type estimate.
 
     Returns:
-        List of trimmed impact dicts, each representing one estimate row. Rows for the same
-        event share a corr_id. Multiple rows per event is normal (deaths, affected, cost are separate).
+        Dict with keys:
+          items:                list of trimmed impact dicts (each is one estimate row;
+                                rows for the same event share a corr_id)
+          sources_queried:      all sources searched
+          sources_with_results: sources that returned at least one result
 
     Note:
         Impact figures are per-source estimates. Different sources may report different numbers
@@ -77,6 +80,7 @@ def search_impacts(
     dt = _datetime_range(date_from, date_to)
 
     items: list[dict] = []
+    sources_with_results: list[str] = []
     for coll in colls:
         if len(items) >= limit:
             break
@@ -87,8 +91,15 @@ def search_impacts(
         if dt:
             body["datetime"] = dt
         try:
-            items.extend(_paginate_search(body, limit - len(items)))
+            new_items = _paginate_search(body, limit - len(items))
+            if new_items:
+                sources_with_results.append(coll.replace("-impacts", ""))
+            items.extend(new_items)
         except Exception:
             continue
 
-    return [_trim_impact(it) for it in items[:limit]]
+    return {
+        "items": [_trim_impact(it) for it in items[:limit]],
+        "sources_queried": [c.replace("-impacts", "") for c in colls],
+        "sources_with_results": sources_with_results,
+    }

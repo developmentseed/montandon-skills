@@ -11,6 +11,18 @@ Find disaster events across sources.
 - `sources`: optional list e.g. `["emdat", "gdacs"]`
 - `limit`: default 10
 
+## Returns
+
+```python
+{
+  "items": [...],               # list of event dicts
+  "sources_queried": [...],     # all sources searched
+  "sources_with_results": [...] # sources that returned data
+}
+```
+
+Always report `sources_queried` and `sources_with_results` to the user — this surfaces coverage gaps.
+
 ## Notes
 
 - Returns one record per source — same real-world event appears once per source that recorded it

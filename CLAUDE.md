@@ -51,7 +51,9 @@ from skills.hazard_codes import hazard_codes
 
 ## Query strategy
 
-**Always query all relevant sources — never restrict to a single source unless the user explicitly asks.**
+**Always query all relevant sources — never restrict to a single source unless the user explicitly asks.** Never pass `sources=` unless the user explicitly names one.
+
+`search_events` and `search_impacts` return a dict — iterate `result["items"]`, and always tell the user `result["sources_queried"]` and `result["sources_with_results"]`.
 
 Different sources capture different aspects:
 - `emdat` — deaths, affected, economic loss (historical)
@@ -75,3 +77,7 @@ Omitting sources silently understates impact. If you must limit scope for perfor
 Shared HTTP/utility code is in `montandon_core.py`. The token comes from `MONTANDON_TOKEN`.
 When running Python via Bash, always use `uv run --env-file .env python -c "..."` — the env
 var is not inherited by sub-processes unless you pass the env file explicitly.
+
+If the inline `-c` string is too complex, write a temporary script to the **project directory**
+(not `/tmp/`), run it with `uv run --env-file .env python <script>.py`, then delete it.
+`skills/` is only importable from the project root.

@@ -12,8 +12,8 @@ def search_events(
     date_from: str | None = None,
     date_to: str | None = None,
     sources: list[str] | None = None,
-    limit: int = 10,
-) -> list[dict]:
+    limit: int = 50,
+) -> dict:
     """
     Search for disaster events across sources.
 
@@ -30,8 +30,11 @@ def search_events(
         limit:         Max results to return (default 10, max ~100)
 
     Returns:
-        List of trimmed event dicts with keys: id, collection, corr_id, title, date,
-        country_codes, hazard_codes, description, related_links.
+        Dict with keys:
+          items:                list of trimmed event dicts (id, collection, corr_id, title,
+                                date, country_codes, hazard_codes, description, related_links)
+          sources_queried:      all sources searched
+          sources_with_results: sources that returned at least one result
 
     Note:
         Each result is a single-source event record. There is no cross-source deduplication
@@ -58,6 +61,7 @@ def search_events(
     dt = _datetime_range(date_from, date_to)
 
     items: list[dict] = []
+    sources_with_results: list[str] = []
     for coll in colls:
         if len(items) >= limit:
             break
@@ -68,8 +72,15 @@ def search_events(
         if dt:
             body["datetime"] = dt
         try:
-            items.extend(_paginate_search(body, limit - len(items)))
+            new_items = _paginate_search(body, limit - len(items))
+            if new_items:
+                sources_with_results.append(coll.replace("-events", ""))
+            items.extend(new_items)
         except Exception:
             continue
 
-    return [_trim_event(it) for it in items[:limit]]
+    return {
+        "items": [_trim_event(it) for it in items[:limit]],
+        "sources_queried": [c.replace("-events", "") for c in colls],
+        "sources_with_results": sources_with_results,
+    }

@@ -55,8 +55,8 @@ def _post_search(body: dict) -> dict:
 def _paginate_search(body: dict, max_items: int) -> list[dict]:
     """POST /search with automatic next-page following up to max_items."""
     items = []
+    d = _post_search(body)
     while True:
-        d = _post_search(body)
         items.extend(d.get("features", []))
         if len(items) >= max_items:
             break
@@ -66,14 +66,6 @@ def _paginate_search(body: dict, max_items: int) -> list[dict]:
         r = _get_session().get(nxt, timeout=30)
         r.raise_for_status()
         d = r.json()
-        items.extend(d.get("features", []))
-        if len(items) >= max_items:
-            break
-        nxt = next((l["href"] for l in d.get("links", []) if l.get("rel") == "next"), None)
-        if not nxt:
-            break
-        body = {**body, "token": nxt}
-        break
     return items[:max_items]
 
 
