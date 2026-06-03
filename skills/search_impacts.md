@@ -4,7 +4,10 @@ Find events by impact threshold. Filters on `*-impacts` collections server-side.
 
 ## Parameters
 
-Same as `search_events` plus:
+- `country_code`: single ISO alpha-3 (`"ETH"`)
+- `country_codes`: list of ISO alpha-3 for regional queries — supersedes `country_code`
+
+Plus impact-specific filters:
 - `min_deaths`: minimum deaths (filters `type='death'`)
 - `min_displaced`: minimum displaced — matches all `displacement` group types in `taxonomy.json`
 

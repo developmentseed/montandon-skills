@@ -21,6 +21,7 @@ def search_impacts(
     min_deaths: float | None = None,
     min_displaced: float | None = None,
     country_code: str | None = None,
+    country_codes: list[str] | None = None,
     sources: list[str] | None = None,
     limit: int = 10,
 ) -> list[dict]:
@@ -36,6 +37,8 @@ def search_impacts(
                         (displaced_total, displaced_internal, displaced_external, evacuated,
                         relocated, homeless)
         country_code:   ISO 3166-1 alpha-3, e.g. "PHL"
+        country_codes:  List of ISO alpha-3 codes to match any of, e.g. ["ETH","KEN","SOM"].
+                        Use for regional queries. Supersedes country_code if both provided.
         sources:        Optional list of source names, e.g. ["emdat"]. Default: all sources with impacts.
         limit:          Max results (default 10, max ~100). Each row is one impact-type estimate.
 
@@ -59,8 +62,9 @@ def search_impacts(
         colls = all_impact_colls
 
     clauses = []
-    if country_code:
-        clauses.append(_ov("monty:country_codes", [country_code]))
+    cc = country_codes or ([country_code] if country_code else None)
+    if cc:
+        clauses.append(_ov("monty:country_codes", cc))
     if hazard_code:
         hazard_values = [hazard_code] + GLIDE_CODES.get(hazard_code, []) + EMDAT_CODES.get(hazard_code, [])
         clauses.append(_ov("monty:hazard_codes", hazard_values))
