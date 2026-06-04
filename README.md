@@ -30,10 +30,9 @@ uv run --env-file .env claude
 
 ## How it works
 
-Claude reads `CLAUDE.md` on startup, which points to `SKILLS.md` (the skill manifest) and
+Claude (or, theoretically, another terminal-based agent) reads `CLAUDE.md` on startup, which points to `SKILLS.md` (the skill manifest) and
 `SKILL.md` (the data guide). Each skill is an independent Python file in `skills/`; shared
-HTTP/utility code lives in `montandon_core.py`. No MCP server, no agent framework — just
-plain Python + the Anthropic API.
+HTTP/utility code lives in `montandon_core.py`.
 
 ## Tools
 

@@ -6,6 +6,8 @@ Find events by impact threshold. Filters on `*-impacts` collections server-side.
 
 - `country_code`: single ISO alpha-3 (`"ETH"`)
 - `country_codes`: list of ISO alpha-3 for regional queries — supersedes `country_code`
+- `date_from` / `date_to`: `"YYYY-MM-DD"`
+- `hazard_code`: UNDRR-ISC code from `hazard_codes()` — never raw EM-DAT codes
 
 Plus impact-specific filters:
 - `min_deaths`: minimum deaths (filters `type='death'`)
