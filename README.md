@@ -42,7 +42,7 @@ HTTP/utility code lives in `montandon_core.py`.
 | `get_event_detail(corr_id)`                                                   | Get full record: event + hazards + impact estimates |
 | `search_impacts(min_deaths, min_displaced, ...)`                              | Find events by impact threshold                     |
 | `list_sources()`                                                              | Show available data sources and collection types    |
-| `hazard_codes(query)`                                                         | Map plain language ("flood") to UNDRR-ISC codes     |
+| `hazard_codes(query)`                                                         | Map plain language ("flood") to hazard codes.       |
 
 ## Further Information
 
