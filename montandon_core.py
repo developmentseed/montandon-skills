@@ -5,7 +5,6 @@ Token must be set in MONTANDON_TOKEN env var.
 """
 import os
 import sys
-from collections import defaultdict
 from typing import Optional
 
 import requests
@@ -115,9 +114,6 @@ def _trim_event(item: dict) -> dict:
         "country_codes": p.get("monty:country_codes", []),
         "hazard_codes": p.get("monty:hazard_codes", []),
         "description": (p.get("description") or "")[:200] or None,
-        "related_links": [
-            l["href"] for l in item.get("links", []) if l.get("rel") == "related"
-        ],
     }
 
 
@@ -152,6 +148,41 @@ def _trim_hazard(item: dict) -> dict:
         "severity_unit": detail.get("severity_unit"),
         "estimate_type": detail.get("estimate_type"),
     }
+
+
+# ---------------------------------------------------------------------------
+# STAC fields extension — server-side payload trimming (~95% size reduction)
+# ---------------------------------------------------------------------------
+
+_EVENT_FIELDS: dict = {
+    "include": [
+        "id", "collection",
+        "properties.title", "properties.datetime", "properties.start_datetime",
+        "properties.monty:corr_id", "properties.monty:country_codes",
+        "properties.monty:hazard_codes", "properties.description",
+    ],
+    "exclude": ["geometry", "assets", "links", "bbox"],
+}
+
+_IMPACT_FIELDS: dict = {
+    "include": [
+        "id", "collection",
+        "properties.datetime", "properties.start_datetime",
+        "properties.monty:corr_id", "properties.monty:country_codes",
+        "properties.monty:hazard_codes", "properties.monty:impact_detail",
+    ],
+    "exclude": ["geometry", "assets", "links", "bbox"],
+}
+
+_HAZARD_FIELDS: dict = {
+    "include": [
+        "id", "collection",
+        "properties.datetime", "properties.start_datetime",
+        "properties.monty:corr_id", "properties.monty:hazard_codes",
+        "properties.monty:hazard_detail",
+    ],
+    "exclude": ["geometry", "assets", "links", "bbox"],
+}
 
 
 def _datetime_range(date_from: str | None, date_to: str | None) -> str | None:
@@ -189,3 +220,11 @@ def _available_collections() -> list[str]:
         path = None
     _cached_collections = colls
     return colls
+
+
+def _colls_by_type(suffix: str, exclude_prefixes: tuple[str, ...] = ()) -> list[str]:
+    """Return live collection IDs ending with suffix, excluding any with given prefixes."""
+    return [
+        c for c in _available_collections()
+        if c.endswith(suffix) and not any(c.startswith(p) for p in exclude_prefixes)
+    ]

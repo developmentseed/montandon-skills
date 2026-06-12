@@ -39,7 +39,7 @@ from skills.hazard_codes import hazard_codes
 ## Data model
 
 - Three item types per source: `*-events`, `*-hazards`, `*-impacts`
-- `monty:corr_id` links an event to its own source's hazards/impacts — not cross-source
+- `monty:corr_id` pairs all items for the same real-world event **across sources** — `get_event_detail` uses it to fetch hazards and impacts from every source in one call
 - Impact rows are typed (`death`, `displaced_total`, etc.) — multiple rows per event is normal
 - EM-DAT cost values are in **thousands of USD** — always multiply × 1,000 when presenting
 
@@ -53,7 +53,7 @@ from skills.hazard_codes import hazard_codes
 
 **Always query all relevant sources — never restrict to a single source unless the user explicitly asks.** Never pass `sources=` unless the user explicitly names one.
 
-`search_events` and `search_impacts` return a dict — iterate `result["items"]`, and always tell the user `result["sources_queried"]` and `result["sources_with_results"]`.
+`search_events` and `search_impacts` return a dict — iterate `result["items"]`, and always tell the user `result["sources_queried"]`, `result["sources_with_results"]`, and `result["total_matched"]` (the server-side count; if it exceeds `len(items)`, results were truncated).
 
 Different sources capture different aspects:
 - `emdat` — deaths, affected, economic loss (historical)
