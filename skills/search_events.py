@@ -2,7 +2,7 @@
 Search for disaster events across Montandon sources.
 """
 from montandon_core import (
-    _ov, _and, _datetime_range, _post_search, _trim_event,
+    _ov, _and, _datetime_range, _paginate_search, _trim_event,
     _colls_by_type, _EVENT_FIELDS,
 )
 from skills.hazard_codes import EMDAT_CODES, GLIDE_CODES
@@ -29,8 +29,13 @@ def search_events(
         date_from:     Start date "YYYY-MM-DD"
         date_to:       End date   "YYYY-MM-DD"
         sources:       Optional list of source names to restrict to, e.g. ["emdat", "gdacs"].
-                       Default: all available sources.
-        limit:         Max results to return (default 50, max 100)
+                       Default: all available sources. AVOID passing this — different sources
+                       have different coverage gaps and ingestion lags; a storm absent from
+                       one source may be documented in another (e.g. ibtracs may lag recent
+                       seasons; gdacs/pdc often have near-real-time events ibtracs lacks).
+        limit:         Max results to return (default 50, max 500). Use a higher value
+                       (e.g. 200–500) for annual or multi-month queries to avoid missing
+                       events in the middle of the date range.
 
     Returns:
         Dict with keys:
@@ -61,7 +66,7 @@ def search_events(
 
     body: dict = {
         "collections": colls,
-        "limit": min(limit, 100),
+        "limit": 100,  # page size per API call
         "fields": _EVENT_FIELDS,
     }
     if clauses:
@@ -71,9 +76,9 @@ def search_events(
     if dt:
         body["datetime"] = dt
 
-    d = _post_search(body)
-    items = d.get("features", [])
-    total_matched = d.get("numberMatched")
+    result = _paginate_search(body, max_items=min(limit, 500))
+    items = result["items"]
+    total_matched = result["total_matched"]
 
     sources_with_results = sorted({
         it.get("collection", "").replace("-events", "")
@@ -81,7 +86,7 @@ def search_events(
     })
 
     return {
-        "items": [_trim_event(it) for it in items[:limit]],
+        "items": [_trim_event(it) for it in items],
         "total_matched": total_matched,
         "sources_queried": [c.replace("-events", "") for c in colls],
         "sources_with_results": sources_with_results,
