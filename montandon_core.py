@@ -62,14 +62,25 @@ def _paginate_search(body: dict, max_items: int) -> dict:
     total_matched = d.get("numberMatched")
     items = list(d.get("features", []))
     while len(items) < max_items:
-        nxt = next((l["href"] for l in d.get("links", []) if l.get("rel") == "next"), None)
-        if not nxt:
+        nxt_link = next((l for l in d.get("links", []) if l.get("rel") == "next"), None)
+        if not nxt_link:
             break
-        r = _get_session().get(nxt, timeout=30)
+        # The server uses POST pagination: next link body contains a token but omits the
+        # CQL2 filter. We merge the token into our original body to preserve the filter.
+        link_body = nxt_link.get("body", {})
+        if nxt_link.get("method", "GET").upper() == "POST" and "token" in link_body:
+            nxt_body = {**body, "token": link_body["token"]}
+            r = _get_session().post(nxt_link["href"], json=nxt_body, timeout=30)
+        else:
+            r = _get_session().get(nxt_link["href"], timeout=30)
         r.raise_for_status()
         d = r.json()
         items.extend(d.get("features", []))
-    return {"items": items[:max_items], "total_matched": total_matched}
+    clipped = items[:max_items]
+    # numberMatched from the first page may undercount when querying multiple collections;
+    # if pagination fetched more items than that number, use the actual count instead.
+    reported_total = total_matched if total_matched is not None and total_matched >= len(clipped) else len(clipped)
+    return {"items": clipped, "total_matched": reported_total}
 
 
 # ---------------------------------------------------------------------------
