@@ -5,7 +5,7 @@ import json
 from pathlib import Path as _Path
 
 from montandon_core import (
-    _ov, _eq, _gt, _and, _or, _datetime_range, _post_search, _trim_impact,
+    _ov, _eq, _gt, _and, _or, _datetime_range, _paginate_search, _trim_impact,
     _colls_by_type, _IMPACT_FIELDS,
 )
 from skills.hazard_codes import EMDAT_CODES, GLIDE_CODES
@@ -94,9 +94,9 @@ def search_impacts(
     if min_deaths is not None or min_displaced is not None:
         body["sortby"] = [{"field": "properties.monty:impact_detail.value", "direction": "desc"}]
 
-    d = _post_search(body)
-    items = d.get("features", [])
-    total_matched = d.get("numberMatched")
+    result = _paginate_search(body, max_items=min(limit, 500))
+    items = result["items"]
+    total_matched = result["total_matched"]
 
     sources_with_results = sorted({
         it.get("collection", "").replace("-impacts", "")
@@ -104,7 +104,7 @@ def search_impacts(
     })
 
     return {
-        "items": [_trim_impact(it) for it in items[:limit]],
+        "items": [_trim_impact(it) for it in items],
         "total_matched": total_matched,
         "sources_queried": [c.replace("-impacts", "") for c in colls],
         "sources_with_results": sources_with_results,

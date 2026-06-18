@@ -51,21 +51,25 @@ def _post_search(body: dict) -> dict:
     return r.json()
 
 
-def _paginate_search(body: dict, max_items: int) -> list[dict]:
-    """POST /search with automatic next-page following up to max_items."""
-    items = []
+def _paginate_search(body: dict, max_items: int) -> dict:
+    """POST /search with automatic next-page following up to max_items.
+
+    Returns a dict with:
+      items         — list of feature dicts (up to max_items)
+      total_matched — server-side count from the first page (may exceed len(items))
+    """
     d = _post_search(body)
-    while True:
-        items.extend(d.get("features", []))
-        if len(items) >= max_items:
-            break
+    total_matched = d.get("numberMatched")
+    items = list(d.get("features", []))
+    while len(items) < max_items:
         nxt = next((l["href"] for l in d.get("links", []) if l.get("rel") == "next"), None)
         if not nxt:
             break
         r = _get_session().get(nxt, timeout=30)
         r.raise_for_status()
         d = r.json()
-    return items[:max_items]
+        items.extend(d.get("features", []))
+    return {"items": items[:max_items], "total_matched": total_matched}
 
 
 # ---------------------------------------------------------------------------

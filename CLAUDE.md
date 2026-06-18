@@ -23,17 +23,20 @@ from skills.hazard_codes import hazard_codes
 
 ## Sources
 
-| Source | Covers |
-|--------|--------|
-| emdat | Historical global events |
-| gdacs | Near-real-time alerts |
-| pdc | Pacific + global alerts |
+All sources are authoritative. Always query all of them — each has unique coverage gaps and
+ingestion lags, so an event absent from one source may be fully documented in another.
+
+| Source | Unique contribution |
+|--------|---------------------|
+| emdat | Historical global events; deaths, affected, economic loss |
+| gdacs | Near-real-time alerts; often first to have recent/ongoing events |
+| pdc | Pacific + global near-real-time alerts |
 | usgs | Earthquakes |
-| ibtracs | Tropical cyclones |
-| idmc-gidd / idmc-idu | Internal displacement |
+| ibtracs | Tropical cyclone best-track archive (may lag current season by months) |
+| idmc-gidd / idmc-idu | Internal displacement counts (often higher than emdat) |
 | ifrcevent | IFRC Emergency Appeals |
 | glide | Cross-source event IDs |
-| desinventar | Local/sub-national records |
+| desinventar | Local/sub-national records for Latin America, South Asia |
 | gfd | Flood events |
 
 ## Data model
@@ -51,19 +54,11 @@ from skills.hazard_codes import hazard_codes
 
 ## Query strategy
 
-**Always query all relevant sources — never restrict to a single source unless the user explicitly asks.** Never pass `sources=` unless the user explicitly names one.
+**Always query ALL sources for every search — never restrict to a single source unless the user explicitly asks by name.** Never pass `sources=` unless the user explicitly names one. Different sources have different coverage gaps and ingestion lags; an event absent from one source may be fully documented in another. Omitting sources silently understates impact and can cause you to miss events entirely.
 
 `search_events` and `search_impacts` return a dict — iterate `result["items"]`, and always tell the user `result["sources_queried"]`, `result["sources_with_results"]`, and `result["total_matched"]` (the server-side count; if it exceeds `len(items)`, results were truncated).
 
-Different sources capture different aspects:
-- `emdat` — deaths, affected, economic loss (historical)
-- `idmc-gidd` / `idmc-idu` — displacement counts (often higher than emdat)
-- `ifrcevent` — IFRC Emergency Appeal scale and response
-- `glide` — cross-source linkage, useful for finding all records of the same event
-- `gdacs` / `pdc` — near-real-time; useful for recent events
-- `desinventar` — local/sub-national detail for Latin America, South Asia
-
-Omitting sources silently understates impact. If you must limit scope for performance, tell the user which sources you queried and which you skipped.
+For annual or multi-month queries (e.g. "all floods in 2024", "strongest storms of 2025"), pass `limit=500` to `search_events` — the default of 50 returns only the most recent events and will silently miss events earlier in the date range.
 
 ## Response guidelines
 
