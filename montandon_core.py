@@ -5,7 +5,6 @@ Token must be set in MONTANDON_TOKEN env var.
 """
 import os
 import sys
-from collections import defaultdict
 from typing import Optional
 
 import requests
@@ -52,21 +51,36 @@ def _post_search(body: dict) -> dict:
     return r.json()
 
 
-def _paginate_search(body: dict, max_items: int) -> list[dict]:
-    """POST /search with automatic next-page following up to max_items."""
-    items = []
+def _paginate_search(body: dict, max_items: int) -> dict:
+    """POST /search with automatic next-page following up to max_items.
+
+    Returns a dict with:
+      items         — list of feature dicts (up to max_items)
+      total_matched — server-side count from the first page (may exceed len(items))
+    """
     d = _post_search(body)
-    while True:
-        items.extend(d.get("features", []))
-        if len(items) >= max_items:
+    total_matched = d.get("numberMatched")
+    items = list(d.get("features", []))
+    while len(items) < max_items:
+        nxt_link = next((l for l in d.get("links", []) if l.get("rel") == "next"), None)
+        if not nxt_link:
             break
-        nxt = next((l["href"] for l in d.get("links", []) if l.get("rel") == "next"), None)
-        if not nxt:
-            break
-        r = _get_session().get(nxt, timeout=30)
+        # The server uses POST pagination: next link body contains a token but omits the
+        # CQL2 filter. We merge the token into our original body to preserve the filter.
+        link_body = nxt_link.get("body", {})
+        if nxt_link.get("method", "GET").upper() == "POST" and "token" in link_body:
+            nxt_body = {**body, "token": link_body["token"]}
+            r = _get_session().post(nxt_link["href"], json=nxt_body, timeout=30)
+        else:
+            r = _get_session().get(nxt_link["href"], timeout=30)
         r.raise_for_status()
         d = r.json()
-    return items[:max_items]
+        items.extend(d.get("features", []))
+    clipped = items[:max_items]
+    # numberMatched from the first page may undercount when querying multiple collections;
+    # if pagination fetched more items than that number, use the actual count instead.
+    reported_total = total_matched if total_matched is not None and total_matched >= len(clipped) else len(clipped)
+    return {"items": clipped, "total_matched": reported_total}
 
 
 # ---------------------------------------------------------------------------
@@ -115,9 +129,6 @@ def _trim_event(item: dict) -> dict:
         "country_codes": p.get("monty:country_codes", []),
         "hazard_codes": p.get("monty:hazard_codes", []),
         "description": (p.get("description") or "")[:200] or None,
-        "related_links": [
-            l["href"] for l in item.get("links", []) if l.get("rel") == "related"
-        ],
     }
 
 
@@ -152,6 +163,41 @@ def _trim_hazard(item: dict) -> dict:
         "severity_unit": detail.get("severity_unit"),
         "estimate_type": detail.get("estimate_type"),
     }
+
+
+# ---------------------------------------------------------------------------
+# STAC fields extension — server-side payload trimming (~95% size reduction)
+# ---------------------------------------------------------------------------
+
+_EVENT_FIELDS: dict = {
+    "include": [
+        "id", "collection",
+        "properties.title", "properties.datetime", "properties.start_datetime",
+        "properties.monty:corr_id", "properties.monty:country_codes",
+        "properties.monty:hazard_codes", "properties.description",
+    ],
+    "exclude": ["geometry", "assets", "links", "bbox"],
+}
+
+_IMPACT_FIELDS: dict = {
+    "include": [
+        "id", "collection",
+        "properties.datetime", "properties.start_datetime",
+        "properties.monty:corr_id", "properties.monty:country_codes",
+        "properties.monty:hazard_codes", "properties.monty:impact_detail",
+    ],
+    "exclude": ["geometry", "assets", "links", "bbox"],
+}
+
+_HAZARD_FIELDS: dict = {
+    "include": [
+        "id", "collection",
+        "properties.datetime", "properties.start_datetime",
+        "properties.monty:corr_id", "properties.monty:hazard_codes",
+        "properties.monty:hazard_detail",
+    ],
+    "exclude": ["geometry", "assets", "links", "bbox"],
+}
 
 
 def _datetime_range(date_from: str | None, date_to: str | None) -> str | None:
@@ -189,3 +235,11 @@ def _available_collections() -> list[str]:
         path = None
     _cached_collections = colls
     return colls
+
+
+def _colls_by_type(suffix: str, exclude_prefixes: tuple[str, ...] = ()) -> list[str]:
+    """Return live collection IDs ending with suffix, excluding any with given prefixes."""
+    return [
+        c for c in _available_collections()
+        if c.endswith(suffix) and not any(c.startswith(p) for p in exclude_prefixes)
+    ]

@@ -1,7 +1,10 @@
 """
 Search for disaster events across Montandon sources.
 """
-from montandon_core import _ov, _and, _datetime_range, _paginate_search, _trim_event
+from montandon_core import (
+    _ov, _and, _datetime_range, _paginate_search, _trim_event,
+    _colls_by_type, _EVENT_FIELDS,
+)
 from skills.hazard_codes import EMDAT_CODES, GLIDE_CODES
 
 
@@ -15,7 +18,7 @@ def search_events(
     limit: int = 50,
 ) -> dict:
     """
-    Search for disaster events across sources.
+    Search for disaster events across sources in a single API request.
 
     Args:
         country_code:  ISO 3166-1 alpha-3 for a single country, e.g. "BGD"
@@ -26,29 +29,32 @@ def search_events(
         date_from:     Start date "YYYY-MM-DD"
         date_to:       End date   "YYYY-MM-DD"
         sources:       Optional list of source names to restrict to, e.g. ["emdat", "gdacs"].
-                       Default: all available sources.
-        limit:         Max results to return (default 10, max ~100)
+                       Default: all available sources. AVOID passing this — different sources
+                       have different coverage gaps and ingestion lags; a storm absent from
+                       one source may be documented in another (e.g. ibtracs may lag recent
+                       seasons; gdacs/pdc often have near-real-time events ibtracs lacks).
+        limit:         Max results to return (default 50, max 500). Use a higher value
+                       (e.g. 200–500) for annual or multi-month queries to avoid missing
+                       events in the middle of the date range.
 
     Returns:
         Dict with keys:
           items:                list of trimmed event dicts (id, collection, corr_id, title,
-                                date, country_codes, hazard_codes, description, related_links)
+                                date, country_codes, hazard_codes, description)
+          total_matched:        total matching records on the server (may exceed len(items))
           sources_queried:      all sources searched
-          sources_with_results: sources that returned at least one result
+          sources_with_results: sources represented in the returned items
 
     Note:
         Each result is a single-source event record. There is no cross-source deduplication
         in v1 — the same disaster may appear once per source that recorded it.
+        sources_with_results reflects the returned page; use total_matched to gauge coverage.
     """
-    all_event_colls = [
-        "desinventar-events", "emdat-events", "gdacs-events", "gfd-events",
-        "glide-events", "ibtracs-events", "idmc-gidd-events", "idmc-idu-events",
-        "ifrcevent-events", "pdc-events", "usgs-events",
-    ]
+    available = _colls_by_type("-events", exclude_prefixes=("reference-",))
     if sources:
-        colls = [f"{s}-events" for s in sources if f"{s}-events" in all_event_colls]
+        colls = [f"{s}-events" for s in sources if f"{s}-events" in available]
     else:
-        colls = all_event_colls
+        colls = available
 
     clauses = []
     cc = country_codes or ([country_code] if country_code else None)
@@ -58,29 +64,30 @@ def search_events(
         hazard_values = [hazard_code] + GLIDE_CODES.get(hazard_code, []) + EMDAT_CODES.get(hazard_code, [])
         clauses.append(_ov("monty:hazard_codes", hazard_values))
 
+    body: dict = {
+        "collections": colls,
+        "limit": 100,  # page size per API call
+        "fields": _EVENT_FIELDS,
+    }
+    if clauses:
+        body["filter-lang"] = "cql2-json"
+        body["filter"] = _and(*clauses)
     dt = _datetime_range(date_from, date_to)
+    if dt:
+        body["datetime"] = dt
 
-    items: list[dict] = []
-    sources_with_results: list[str] = []
-    for coll in colls:
-        if len(items) >= limit:
-            break
-        body: dict = {"collections": [coll], "limit": min(limit, 100)}
-        if clauses:
-            body["filter-lang"] = "cql2-json"
-            body["filter"] = _and(*clauses)
-        if dt:
-            body["datetime"] = dt
-        try:
-            new_items = _paginate_search(body, limit - len(items))
-            if new_items:
-                sources_with_results.append(coll.replace("-events", ""))
-            items.extend(new_items)
-        except Exception:
-            continue
+    result = _paginate_search(body, max_items=min(limit, 500))
+    items = result["items"]
+    total_matched = result["total_matched"]
+
+    sources_with_results = sorted({
+        it.get("collection", "").replace("-events", "")
+        for it in items if it.get("collection")
+    })
 
     return {
-        "items": [_trim_event(it) for it in items[:limit]],
+        "items": [_trim_event(it) for it in items],
+        "total_matched": total_matched,
         "sources_queried": [c.replace("-events", "") for c in colls],
         "sources_with_results": sources_with_results,
     }
