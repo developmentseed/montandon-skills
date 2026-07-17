@@ -1,13 +1,19 @@
 # hazard_codes
 
-Map plain language to UNDRR-ISC codes. No API call — pure in-memory lookup.
+Full table of UNDRR-ISC 2025 hazard codes — the complete upstream taxonomy, unfiltered.
+No API call — pure in-memory lookup. Not a search function: it returns everything, and
+you do the matching yourself by reading the `name` field.
 
 ## Workflow
 
-1. Call `hazard_codes("flood")` to get candidate codes
-2. If multiple plausible codes return, ask the user to clarify before querying
-3. Pass `undrr_code` to search functions — never raw EM-DAT codes
-4. Tell the user which code you used
+1. Call `hazard_codes()` — it takes no arguments, returns the full table
+2. Read the `name` field of each entry and semantically match it to what the user asked
+   for (e.g. "hurricane" → the entry named "Tropical Cyclone"). Never guess a code from
+   memory — always copy `undrr_code` from the returned list.
+3. If more than one entry is plausible (e.g. "storm"), ask the user to clarify before
+   querying
+4. Pass `undrr_code` to search functions — never raw EM-DAT or GLIDE codes
+5. Tell the user which code you used
 
 ## Three taxonomies
 
@@ -18,20 +24,25 @@ Map plain language to UNDRR-ISC codes. No API call — pure in-memory lookup.
 
 You only need to pass the UNDRR code — expansion to GLIDE and EM-DAT is automatic.
 
-## Quick reference
+## Coverage
 
-| Plain language | UNDRR | GLIDE |
-|----------------|-------|-------|
-| Flood (riverine) | MH0600 | FL |
-| Flash flood | MH0603 | FF |
-| Coastal flood | MH0601 | FL |
-| Tropical cyclone | MH0309 | TC |
-| Earthquake | GH0001 | EQ |
-| Volcanic eruption | GH0101 | VO |
-| Landslide | GH0200 | LS |
-| Drought | MH0400 | DR |
-| Wildfire | MH0800 | WF |
-| Extreme temperature | MH0500 | EP |
-| Tsunami | GH0300 | TS |
+295 hazard codes — the complete UNDRR-ISC 2025 taxonomy from pystac-monty's
+HazardProfiles.csv, taken as-is with no relevance filtering. This intentionally
+includes families with no current Montandon coverage (chemical contaminants, cyber
+hazards, societal/conflict, extraterrestrial) — which hazard types actually appear in
+search results is determined by Montandon's underlying sources, not by this table.
+Pre-filtering it would risk silently making a real, newly-ingested hazard type
+unsearchable, the same failure mode that caused earlier versions of this table to miss
+codes.
 
-Full taxonomy with EM-DAT mappings: `skills/taxonomy.json`
+Each entry includes `cluster` and `family` (the UNDRR-ISC grouping) as extra context —
+useful for disambiguating between plausible matches or explaining a code to the user.
+
+## Updating
+
+Source data lives in `skills/taxonomy.json`. Regenerate it from the latest upstream CSV
+with:
+```
+uv run python scripts/generate_taxonomy.py
+```
+Re-run this if IFRCGo/pystac-monty publishes an update to HazardProfiles.csv.

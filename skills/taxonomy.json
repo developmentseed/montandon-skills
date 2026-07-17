@@ -1,140 +1,2695 @@
 {
-  "_source": "https://ifrcgo.org/monty-stac-extension/model/taxonomy/#2025-update",
+  "_source": "hazard_codes: https://github.com/IFRCGo/pystac-monty (pystac_monty/HazardProfiles.csv, UNDRR-ISC 2025 \u2014 full upstream table, unfiltered); impact_types: https://ifrcgo.org/monty-stac-extension/model/taxonomy/#2025-update",
   "impact_types": [
-    {"code": "death",              "label": "Death",                                                         "group": "fatalities"},
-    {"code": "missing",            "label": "Missing",                                                       "group": "fatalities"},
-    {"code": "injured",            "label": "Injured",                                                       "group": "fatalities"},
-    {"code": "displaced_total",    "label": "Displaced Persons (Internal & External)",                       "group": "displacement"},
-    {"code": "displaced_internal", "label": "Internally Displaced Persons (IDPs)",                          "group": "displacement"},
-    {"code": "displaced_external", "label": "Refugees, Asylum Seekers and Externally Displaced Persons",    "group": "displacement"},
-    {"code": "evacuated",          "label": "Evacuated",                                                     "group": "displacement"},
-    {"code": "relocated",          "label": "Relocated",                                                     "group": "displacement"},
-    {"code": "homeless",           "label": "Homeless",                                                      "group": "displacement"},
-    {"code": "affected_total",     "label": "Total Affected",                                                "group": "affected_people"},
-    {"code": "affected_direct",    "label": "Directly Affected",                                             "group": "affected_people"},
-    {"code": "affected_indirect",  "label": "Indirectly Affected",                                           "group": "affected_people"},
-    {"code": "potentially_affected","label": "Potentially Affected",                                         "group": "affected_people"},
-    {"code": "unaffected",         "label": "Unaffected",                                                    "group": "affected_people"},
-    {"code": "assisted",           "label": "Assisted (Received Aid/Support)",                               "group": "humanitarian_response"},
-    {"code": "in_need",            "label": "In Need",                                                       "group": "humanitarian_response"},
-    {"code": "targeted",           "label": "Targeted",                                                      "group": "humanitarian_response"},
-    {"code": "shelter_emergency",  "label": "Emergency Sheltered",                                           "group": "humanitarian_response"},
-    {"code": "shelter_temporary",  "label": "Temporary Accommodated",                                        "group": "humanitarian_response"},
-    {"code": "shelter_longterm",   "label": "Long-Term Accommodated",                                        "group": "humanitarian_response"},
-    {"code": "damaged",            "label": "Damaged",                                                       "group": "physical_damage"},
-    {"code": "destroyed",          "label": "Destroyed",                                                     "group": "physical_damage"},
-    {"code": "potentially_damaged","label": "Potentially Damaged",                                           "group": "physical_damage"},
-    {"code": "disrupted",          "label": "Disrupted",                                                     "group": "physical_damage"},
-    {"code": "cost",               "label": "Loss (Cost)",                                                   "group": "financial"},
-    {"code": "alertscore",         "label": "Alertscore",                                                    "group": "other"},
-    {"code": "highest_risk",       "label": "Highest Risk",                                                  "group": "other"},
-    {"code": "unspecified",        "label": "Unspecified",                                                   "group": "other"}
+    {
+      "code": "death",
+      "label": "Death",
+      "group": "fatalities"
+    },
+    {
+      "code": "missing",
+      "label": "Missing",
+      "group": "fatalities"
+    },
+    {
+      "code": "injured",
+      "label": "Injured",
+      "group": "fatalities"
+    },
+    {
+      "code": "displaced_total",
+      "label": "Displaced Persons (Internal & External)",
+      "group": "displacement"
+    },
+    {
+      "code": "displaced_internal",
+      "label": "Internally Displaced Persons (IDPs)",
+      "group": "displacement"
+    },
+    {
+      "code": "displaced_external",
+      "label": "Refugees, Asylum Seekers and Externally Displaced Persons",
+      "group": "displacement"
+    },
+    {
+      "code": "evacuated",
+      "label": "Evacuated",
+      "group": "displacement"
+    },
+    {
+      "code": "relocated",
+      "label": "Relocated",
+      "group": "displacement"
+    },
+    {
+      "code": "homeless",
+      "label": "Homeless",
+      "group": "displacement"
+    },
+    {
+      "code": "affected_total",
+      "label": "Total Affected",
+      "group": "affected_people"
+    },
+    {
+      "code": "affected_direct",
+      "label": "Directly Affected",
+      "group": "affected_people"
+    },
+    {
+      "code": "affected_indirect",
+      "label": "Indirectly Affected",
+      "group": "affected_people"
+    },
+    {
+      "code": "potentially_affected",
+      "label": "Potentially Affected",
+      "group": "affected_people"
+    },
+    {
+      "code": "unaffected",
+      "label": "Unaffected",
+      "group": "affected_people"
+    },
+    {
+      "code": "assisted",
+      "label": "Assisted (Received Aid/Support)",
+      "group": "humanitarian_response"
+    },
+    {
+      "code": "in_need",
+      "label": "In Need",
+      "group": "humanitarian_response"
+    },
+    {
+      "code": "targeted",
+      "label": "Targeted",
+      "group": "humanitarian_response"
+    },
+    {
+      "code": "shelter_emergency",
+      "label": "Emergency Sheltered",
+      "group": "humanitarian_response"
+    },
+    {
+      "code": "shelter_temporary",
+      "label": "Temporary Accommodated",
+      "group": "humanitarian_response"
+    },
+    {
+      "code": "shelter_longterm",
+      "label": "Long-Term Accommodated",
+      "group": "humanitarian_response"
+    },
+    {
+      "code": "damaged",
+      "label": "Damaged",
+      "group": "physical_damage"
+    },
+    {
+      "code": "destroyed",
+      "label": "Destroyed",
+      "group": "physical_damage"
+    },
+    {
+      "code": "potentially_damaged",
+      "label": "Potentially Damaged",
+      "group": "physical_damage"
+    },
+    {
+      "code": "disrupted",
+      "label": "Disrupted",
+      "group": "physical_damage"
+    },
+    {
+      "code": "cost",
+      "label": "Loss (Cost)",
+      "group": "financial"
+    },
+    {
+      "code": "alertscore",
+      "label": "Alertscore",
+      "group": "other"
+    },
+    {
+      "code": "highest_risk",
+      "label": "Highest Risk",
+      "group": "other"
+    },
+    {
+      "code": "unspecified",
+      "label": "Unspecified",
+      "group": "other"
+    }
   ],
   "hazard_codes": [
     {
-      "undrr": "MH0600", "glide": "FL", "name": "Flood (general/riverine)",
-      "synonyms": ["flood", "flooding", "inundation", "riverine flood"],
-      "emdat": ["nat-hyd-flo-flo", "nat-hyd-flo-riv"]
+      "undrr": "BI0101",
+      "glide": "OT",
+      "name": "Airborne Diseases (human and Animal)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": [
+        "nat-bio-epi-dis"
+      ]
     },
     {
-      "undrr": "MH0603", "glide": "FF", "name": "Flash flood",
-      "synonyms": ["flash flood", "flash flooding", "pluvial", "surface water flood", "rapid onset flood"],
-      "emdat": ["nat-hyd-flo-fla"]
-    },
-    {
-      "undrr": "MH0601", "glide": "FL", "name": "Coastal flood",
-      "synonyms": ["coastal flood", "storm surge", "sea flood", "tidal flood"],
-      "emdat": ["nat-hyd-flo-flo"]
-    },
-    {
-      "undrr": "MH0602", "glide": "FL", "name": "Urban flood",
-      "synonyms": ["urban flood", "city flood"],
+      "undrr": "BI0102",
+      "glide": "OT",
+      "name": "Blood Borne Viruses (Human and Animal)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
       "emdat": []
     },
     {
-      "undrr": "MH0309", "glide": "TC", "name": "Tropical cyclone",
-      "synonyms": ["cyclone", "typhoon", "hurricane", "tropical storm", "tc"],
-      "emdat": ["nat-met-sto-tro"]
-    },
-    {
-      "undrr": "MH0101", "glide": "ST", "name": "Severe storm / convective",
-      "synonyms": ["storm", "severe storm", "thunderstorm", "hailstorm", "lightning", "tornado", "downburst"],
-      "emdat": ["nat-met-sto-sev", "nat-met-sto-sto", "nat-met-sto-tor", "nat-met-sto-lig", "nat-met-sto-san"]
-    },
-    {
-      "undrr": "MH0103", "glide": "ST", "name": "Extra-tropical storm",
-      "synonyms": ["extratropical storm", "winter storm", "blizzard", "nor'easter"],
-      "emdat": ["nat-met-sto-bli"]
-    },
-    {
-      "undrr": "GH0001", "glide": "EQ", "name": "Earthquake",
-      "synonyms": ["earthquake", "quake", "seismic", "tremor", "eq"],
-      "emdat": ["nat-geo-ear-gro"]
-    },
-    {
-      "undrr": "GH0101", "glide": "VO", "name": "Volcanic eruption",
-      "synonyms": ["volcano", "volcanic", "eruption", "lava", "ash cloud"],
-      "emdat": ["nat-geo-vol-ash", "nat-geo-vol-pyr"]
-    },
-    {
-      "undrr": "GH0200", "glide": "LS", "name": "Landslide / mass movement",
-      "synonyms": ["landslide", "mudslide", "rockslide", "avalanche", "debris flow", "mass movement"],
-      "emdat": ["nat-hyd-mmw-lan", "nat-hyd-mmw-mud"]
-    },
-    {
-      "undrr": "MH0400", "glide": "DR", "name": "Drought",
-      "synonyms": ["drought", "dry spell", "water scarcity", "desiccation"],
-      "emdat": ["nat-cli-dro-dro"]
-    },
-    {
-      "undrr": "MH0800", "glide": "WF", "name": "Wildfire",
-      "synonyms": ["wildfire", "forest fire", "bushfire", "brush fire"],
-      "emdat": ["nat-cli-wil-wil", "nat-cli-wil-for"]
-    },
-    {
-      "undrr": "MH0500", "glide": "EP", "name": "Extreme temperature",
-      "synonyms": ["heatwave", "heat wave", "extreme heat", "cold wave", "freeze", "frost"],
-      "emdat": ["nat-met-ext-sev"]
-    },
-    {
-      "undrr": "MH0300", "glide": "HU", "name": "Hailstorm",
-      "synonyms": ["hail", "hailstorm"],
+      "undrr": "BI0103",
+      "glide": "OT",
+      "name": "Diarrhoeal Diseases (Human)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
       "emdat": []
     },
     {
-      "undrr": "GH0300", "glide": "TS", "name": "Tsunami",
-      "synonyms": ["tsunami", "tidal wave"],
-      "emdat": ["nat-geo-ear-tsu"]
-    },
-    {
-      "undrr": "EN0205", "glide": "AC", "name": "Accident / technological",
-      "synonyms": ["accident", "industrial accident", "chemical spill", "oil spill", "explosion"],
-      "emdat": ["tec-ind-exp-exp", "tec-ind-fir-fir", "tec-ind-col-col", "tec-mis-exp-exp", "tec-mis-fir-fir", "tec-mis-col-col"]
-    },
-    {
-      "undrr": "TL0048", "glide": "AC", "name": "Road transport accident",
-      "synonyms": ["road accident", "traffic accident", "vehicle crash"],
-      "emdat": ["tec-tra-roa-roa"]
-    },
-    {
-      "undrr": "TL0049", "glide": "AC", "name": "Water transport accident",
-      "synonyms": ["boat accident", "ship accident", "maritime accident"],
-      "emdat": ["tec-tra-wat-wat"]
-    },
-    {
-      "undrr": "TL0051", "glide": "AC", "name": "Air transport accident",
-      "synonyms": ["plane crash", "air accident", "aviation accident"],
-      "emdat": ["tec-tra-air-air"]
-    },
-    {
-      "undrr": "TL0052", "glide": "AC", "name": "Rail transport accident",
-      "synonyms": ["train accident", "rail accident"],
-      "emdat": ["tec-tra-rai-rai"]
-    },
-    {
-      "undrr": "GH0311", "glide": "EQ", "name": "Earthquake (shallow)",
-      "synonyms": ["shallow earthquake"],
+      "undrr": "BI0104",
+      "glide": "OT",
+      "name": "Foodborne Diseases (Human impact)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
       "emdat": []
+    },
+    {
+      "undrr": "BI0105",
+      "glide": "OT",
+      "name": "Neglected Tropical Diseases (Human)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0106",
+      "glide": "OT",
+      "name": "Sexually Transmitted Diseases (Human)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0107",
+      "glide": "OT",
+      "name": "Vaccine-Preventable Diseases (Human)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0108",
+      "glide": "OT",
+      "name": "Vector Borne Diseases (VBD) (Human and Animal)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0109",
+      "glide": "OT",
+      "name": "Viral Haemorrhagic Fevers (Human)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0110",
+      "glide": "OT",
+      "name": "Waterborne Diseases (Human)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0111",
+      "glide": "OT",
+      "name": "Cryptosporidium (Human and Animal)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0112",
+      "glide": "OT",
+      "name": "Cysticercosis (Human and Animal)",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0113",
+      "glide": "OT",
+      "name": "Zoonotic Diseases",
+      "cluster": "Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0201",
+      "glide": "OT",
+      "name": "Anthrax",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0202",
+      "glide": "OT",
+      "name": "Brucellosis (Human and Animal)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0203",
+      "glide": "OT",
+      "name": "Chikungunya",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0204",
+      "glide": "OT",
+      "name": "Cholera (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0205",
+      "glide": "OT",
+      "name": "COVID-19 (SARS-CoV-2) (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0206",
+      "glide": "OT",
+      "name": "Crimean-Congo Haemorrhagic Fever (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0207",
+      "glide": "OT",
+      "name": "Dengue (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0208",
+      "glide": "OT",
+      "name": "Diphtheria (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0209",
+      "glide": "OT",
+      "name": "Ebola (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0210",
+      "glide": "OT",
+      "name": "Escherichia Coli (STEC) (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0211",
+      "glide": "OT",
+      "name": "Hepatitis A (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0212",
+      "glide": "OT",
+      "name": "Hepatitis B (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0213",
+      "glide": "OT",
+      "name": "Hepatitis C (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0214",
+      "glide": "OT",
+      "name": "HIV and AIDS (Human)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0215",
+      "glide": "OT",
+      "name": "Human Influenza Pandemic",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0216",
+      "glide": "OT",
+      "name": "Lassa Fever",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0217",
+      "glide": "OT",
+      "name": "Malaria",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0218",
+      "glide": "OT",
+      "name": "Measles",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0219",
+      "glide": "OT",
+      "name": "MERS-CoV",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0220",
+      "glide": "OT",
+      "name": "Marburg Virus",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0221",
+      "glide": "OT",
+      "name": "Monkeypox",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0222",
+      "glide": "OT",
+      "name": "Nipah Virus",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0223",
+      "glide": "OT",
+      "name": "Plague",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0224",
+      "glide": "OT",
+      "name": "Poliomyelitis",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0225",
+      "glide": "OT",
+      "name": "Rabies",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0226",
+      "glide": "OT",
+      "name": "Rift Valley Fever",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0227",
+      "glide": "OT",
+      "name": "SARS",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0228",
+      "glide": "OT",
+      "name": "Smallpox",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0229",
+      "glide": "OT",
+      "name": "Tuberculosis",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0230",
+      "glide": "OT",
+      "name": "Typhoid Fever",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0231",
+      "glide": "OT",
+      "name": "West Nile Virus",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0232",
+      "glide": "OT",
+      "name": "Yellow Fever",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0233",
+      "glide": "OT",
+      "name": "Zika Virus",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0234",
+      "glide": "OT",
+      "name": "Disease X",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0235",
+      "glide": "OT",
+      "name": "Avian Influenza (Bird Flu)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0236",
+      "glide": "OT",
+      "name": "Bovine Spongiform Encephalopathy (Mad Cow Disease)",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0237",
+      "glide": "OT",
+      "name": "Foot and Mouth Disease",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0238",
+      "glide": "OT",
+      "name": "Screwworm",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0239",
+      "glide": "OT",
+      "name": "African Swine Fever",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0240",
+      "glide": "OT",
+      "name": "Bluetongue",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0241",
+      "glide": "OT",
+      "name": "Lumpy Skin Disease",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0242",
+      "glide": "OT",
+      "name": "Newcastle Disease",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0243",
+      "glide": "OT",
+      "name": "Rinderpest",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0244",
+      "glide": "OT",
+      "name": "Sheep and Goat Pox",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0245",
+      "glide": "OT",
+      "name": "Classical Swine Fever",
+      "cluster": "Specific Infectious Disease of Public Health Concern",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0301",
+      "glide": "OT",
+      "name": "Locust Swarms",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0302",
+      "glide": "OT",
+      "name": "Desert Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0303",
+      "glide": "OT",
+      "name": "Migratory Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0304",
+      "glide": "OT",
+      "name": "Red Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0305",
+      "glide": "OT",
+      "name": "Brown Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0306",
+      "glide": "OT",
+      "name": "Italian Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0307",
+      "glide": "OT",
+      "name": "Moroccan Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0308",
+      "glide": "OT",
+      "name": "Australian Plague Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0309",
+      "glide": "OT",
+      "name": "Tree Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0310",
+      "glide": "OT",
+      "name": "Rocky Mountain Locust",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0401",
+      "glide": "OT",
+      "name": "Bees (including Africanized Honeybees)",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0402",
+      "glide": "OT",
+      "name": "Wasps",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0403",
+      "glide": "OT",
+      "name": "Hornets",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0404",
+      "glide": "OT",
+      "name": "Ants (including Fire Ants)",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0405",
+      "glide": "OT",
+      "name": "Spiders",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0406",
+      "glide": "OT",
+      "name": "Scorpions",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0407",
+      "glide": "OT",
+      "name": "Ticks",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0408",
+      "glide": "OT",
+      "name": "Mosquitoes",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0409",
+      "glide": "OT",
+      "name": "Fleas",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0410",
+      "glide": "OT",
+      "name": "Chiggers",
+      "cluster": "Insect-related Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0501",
+      "glide": "OT",
+      "name": "Plant Diseases (Agricultural)",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0502",
+      "glide": "OT",
+      "name": "Bacterial Plant Diseases",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0503",
+      "glide": "OT",
+      "name": "Fungal Plant Diseases",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0504",
+      "glide": "OT",
+      "name": "Viral Plant Diseases",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0505",
+      "glide": "OT",
+      "name": "Nematode Plant Diseases",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0506",
+      "glide": "OT",
+      "name": "Phytoplasma Plant Diseases",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0507",
+      "glide": "OT",
+      "name": "Plant Rust",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0508",
+      "glide": "OT",
+      "name": "Rice Blast",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0509",
+      "glide": "OT",
+      "name": "Wheat Blast",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0510",
+      "glide": "OT",
+      "name": "Citrus Greening",
+      "cluster": "Plant Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0601",
+      "glide": "OT",
+      "name": "Harmful Algal Blooms",
+      "cluster": "Other Biological Hazards",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0602",
+      "glide": "OT",
+      "name": "Jellyfish Blooms",
+      "cluster": "Other Biological Hazards",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0603",
+      "glide": "OT",
+      "name": "Mycotoxins",
+      "cluster": "Other Biological Hazards",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0604",
+      "glide": "OT",
+      "name": "Snakes",
+      "cluster": "Other Biological Hazards",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0605",
+      "glide": "OT",
+      "name": "Marine Organisms",
+      "cluster": "Other Biological Hazards",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0606",
+      "glide": "OT",
+      "name": "Invasive Species",
+      "cluster": "Other Biological Hazards",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0100",
+      "glide": "OT",
+      "name": "Heavy Metals & Trace Elements",
+      "cluster": "Heavy Metals & Trace Element Contaminants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0101",
+      "glide": "OT",
+      "name": "Arsenic",
+      "cluster": "Heavy Metals & Trace Element Contaminants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0102",
+      "glide": "OT",
+      "name": "Cadmium",
+      "cluster": "Heavy Metals & Trace Element Contaminants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0103",
+      "glide": "OT",
+      "name": "Lead",
+      "cluster": "Heavy Metals & Trace Element Contaminants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0104",
+      "glide": "OT",
+      "name": "Mercury",
+      "cluster": "Heavy Metals & Trace Element Contaminants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0105",
+      "glide": "OT",
+      "name": "Fluoride & Iodine/Iodide Excess or Inadequate Intake",
+      "cluster": "Heavy Metals & Trace Element Contaminants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0201",
+      "glide": "OT",
+      "name": "Aflatoxins",
+      "cluster": "Carcinogens",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0202",
+      "glide": "OT",
+      "name": "Asbestos",
+      "cluster": "Carcinogens",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0203",
+      "glide": "OT",
+      "name": "Benzene & Hydrocarbons",
+      "cluster": "Carcinogens",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0300",
+      "glide": "OT",
+      "name": "Toxic Gases",
+      "cluster": "Toxic Gases",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0301",
+      "glide": "OT",
+      "name": "Ammonia",
+      "cluster": "Toxic Gases",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0302",
+      "glide": "OT",
+      "name": "Carbon Monoxide",
+      "cluster": "Toxic Gases",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0303",
+      "glide": "OT",
+      "name": "Chlorine",
+      "cluster": "Toxic Gases",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0400",
+      "glide": "OT",
+      "name": "Asphyxiant Gases",
+      "cluster": "Asphyxiant Gases",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0500",
+      "glide": "OT",
+      "name": "Persistent Organic Pollutants",
+      "cluster": "Persistent Organic Pollutants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0501",
+      "glide": "OT",
+      "name": "Pesticides",
+      "cluster": "Persistent Organic Pollutants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0502",
+      "glide": "OT",
+      "name": "Dioxins & Dioxin-like Substance",
+      "cluster": "Persistent Organic Pollutants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0503",
+      "glide": "OT",
+      "name": "Polyfluoroalkyl Substances",
+      "cluster": "Persistent Organic Pollutants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0504",
+      "glide": "OT",
+      "name": "Microplastics",
+      "cluster": "Persistent Organic Pollutants",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0601",
+      "glide": "OT",
+      "name": "Levels of Contaminants in Food & Feed",
+      "cluster": "Chemical Hazards in Food and Pharmaceuticals",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0602",
+      "glide": "OT",
+      "name": "Substandard & Falsified Medical Products",
+      "cluster": "Chemical Hazards in Food and Pharmaceuticals",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0603",
+      "glide": "OT",
+      "name": "Methanol",
+      "cluster": "Chemical Hazards in Food and Pharmaceuticals",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0604",
+      "glide": "OT",
+      "name": "Opioids & Other Addictive Substances",
+      "cluster": "Chemical Hazards in Food and Pharmaceuticals",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0605",
+      "glide": "OT",
+      "name": "Marine Toxins",
+      "cluster": "Chemical Hazards in Food and Pharmaceuticals",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0901",
+      "glide": "OT",
+      "name": "Corrosive Substances",
+      "cluster": "Other Chemical Hazards",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0902",
+      "glide": "OT",
+      "name": "Ammonium Nitrate",
+      "cluster": "Other Chemical Hazards",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "CH0903",
+      "glide": "OT",
+      "name": "Chemical Warfare Agents",
+      "cluster": "Other Chemical Hazards",
+      "family": "Chemical",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0101",
+      "glide": "OT",
+      "name": "Household Air Pollution",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0102",
+      "glide": "OT",
+      "name": "Air Pollution (Point Source)",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0103",
+      "glide": "OT",
+      "name": "Ambient (Outdoor) Air Pollution",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0104",
+      "glide": "OT",
+      "name": "Black Carbon",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0105",
+      "glide": "OT",
+      "name": "Acid Rain",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0106",
+      "glide": "OT",
+      "name": "Runoff / Nonpoint Source Pollution",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0201",
+      "glide": "OT",
+      "name": "Deforestation",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0202",
+      "glide": "OT",
+      "name": "Forest Declines and Diebacks",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0203",
+      "glide": "OT",
+      "name": "Forest Disturbances",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0204",
+      "glide": "OT",
+      "name": "Forest Invasive Species",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0205",
+      "glide": "WF",
+      "name": "Wildfires",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": [
+        "nat-cli-wil-wil"
+      ]
+    },
+    {
+      "undrr": "EN0206",
+      "glide": "OT",
+      "name": "Desertification",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": [
+        "nat-geo-env-des"
+      ]
+    },
+    {
+      "undrr": "EN0207",
+      "glide": "OT",
+      "name": "Loss of Mangroves",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0301",
+      "glide": "OT",
+      "name": "Land Degradation",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0302",
+      "glide": "OT",
+      "name": "Seawater intrusion",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0303",
+      "glide": "OT",
+      "name": "Salinity & Sodicity",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": [
+        "nat-geo-env-slr"
+      ]
+    },
+    {
+      "undrr": "EN0304",
+      "glide": "OT",
+      "name": "Wetland Loss/Degradation",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0305",
+      "glide": "OT",
+      "name": "Permafrost Loss",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0401",
+      "glide": "OT",
+      "name": "Ocean Acidification",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0402",
+      "glide": "OT",
+      "name": "Sea Level Rise",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0403",
+      "glide": "OT",
+      "name": "Eutrophication",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0404",
+      "glide": "OT",
+      "name": "Coral Bleaching",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0405",
+      "glide": "OT",
+      "name": "Sand Mining",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "EN0501",
+      "glide": "OT",
+      "name": "Biodiversity Loss",
+      "cluster": "Environmental Degradation",
+      "family": "Environmental",
+      "emdat": []
+    },
+    {
+      "undrr": "ET0101",
+      "glide": "OT",
+      "name": "Geomagnetic Disturbance",
+      "cluster": "Space Weather",
+      "family": "Extraterrestrial",
+      "emdat": [
+        "nat-ext-spa-geo"
+      ]
+    },
+    {
+      "undrr": "ET0102",
+      "glide": "OT",
+      "name": "Ionospheric Disturbance",
+      "cluster": "Space Weather",
+      "family": "Extraterrestrial",
+      "emdat": []
+    },
+    {
+      "undrr": "ET0103",
+      "glide": "OT",
+      "name": "Solar Flare",
+      "cluster": "Space Weather",
+      "family": "Extraterrestrial",
+      "emdat": [
+        "nat-ext-spa-rad"
+      ]
+    },
+    {
+      "undrr": "ET0104",
+      "glide": "OT",
+      "name": "Solar Energetic Particles",
+      "cluster": "Space Weather",
+      "family": "Extraterrestrial",
+      "emdat": []
+    },
+    {
+      "undrr": "ET0201",
+      "glide": "OT",
+      "name": "Airburst",
+      "cluster": "Extraterrestrial Hazard",
+      "family": "Extraterrestrial",
+      "emdat": [
+        "nat-ext-imp-air"
+      ]
+    },
+    {
+      "undrr": "ET0202",
+      "glide": "OT",
+      "name": "UV Radiation",
+      "cluster": "Extraterrestrial Hazard",
+      "family": "Extraterrestrial",
+      "emdat": []
+    },
+    {
+      "undrr": "ET0203",
+      "glide": "OT",
+      "name": "Meteorite Impact",
+      "cluster": "Extraterrestrial Hazard",
+      "family": "Extraterrestrial",
+      "emdat": [
+        "nat-ext-imp-col"
+      ]
+    },
+    {
+      "undrr": "ET0204",
+      "glide": "OT",
+      "name": "Space Hazard / Accident",
+      "cluster": "Extraterrestrial Hazard",
+      "family": "Extraterrestrial",
+      "emdat": [
+        "nat-ext-spa-sho"
+      ]
+    },
+    {
+      "undrr": "ET0205",
+      "glide": "OT",
+      "name": "Near-Earth Object",
+      "cluster": "Extraterrestrial Hazard",
+      "family": "Extraterrestrial",
+      "emdat": []
+    },
+    {
+      "undrr": "ET0206",
+      "glide": "OT",
+      "name": "Space Debris",
+      "cluster": "Extraterrestrial Hazard",
+      "family": "Extraterrestrial",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0101",
+      "glide": "EQ",
+      "name": "Earthquake",
+      "cluster": "Seismic",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-ear-gro"
+      ]
+    },
+    {
+      "undrr": "GH0201",
+      "glide": "VO",
+      "name": "Lava Flows (Lava Domes)",
+      "cluster": "Volcanic",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-vol-lav"
+      ]
+    },
+    {
+      "undrr": "GH0202",
+      "glide": "VO",
+      "name": "Ash/Tephra Fall (including Volcanic Ballistic projectiles)",
+      "cluster": "Volcanic",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-vol-ash"
+      ]
+    },
+    {
+      "undrr": "GH0203",
+      "glide": "VO",
+      "name": "Pyroclastic Density Current",
+      "cluster": "Volcanic",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-vol-pyr"
+      ]
+    },
+    {
+      "undrr": "GH0204",
+      "glide": "VO",
+      "name": "Lahars",
+      "cluster": "Volcanic",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-vol-lah"
+      ]
+    },
+    {
+      "undrr": "GH0205",
+      "glide": "VO",
+      "name": "Volcanic Gases and Aerosols",
+      "cluster": "Volcanic",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-vol-vol"
+      ]
+    },
+    {
+      "undrr": "GH0300",
+      "glide": "LS",
+      "name": "Gravitational Mass Movement (Landslide)",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-mmd-lan"
+      ]
+    },
+    {
+      "undrr": "GH0301",
+      "glide": "OT",
+      "name": "Falls",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0302",
+      "glide": "OT",
+      "name": "Spreads",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0303",
+      "glide": "MS",
+      "name": "Flows",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": [
+        "nat-hyd-mmw-mud"
+      ]
+    },
+    {
+      "undrr": "GH0304",
+      "glide": "OT",
+      "name": "Slides",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0305",
+      "glide": "OT",
+      "name": "Topples",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0306",
+      "glide": "OT",
+      "name": "Submarine Landslide",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0307",
+      "glide": "EQ",
+      "name": "Liquefaction",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-ear-gro"
+      ]
+    },
+    {
+      "undrr": "GH0308",
+      "glide": "OT",
+      "name": "Sinkhole",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-mmd-sub"
+      ]
+    },
+    {
+      "undrr": "GH0309",
+      "glide": "EQ",
+      "name": "Subsidence and Uplift",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-ear-gro"
+      ]
+    },
+    {
+      "undrr": "GH0310",
+      "glide": "OT",
+      "name": "Shrink-Swell Subsidence",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0311",
+      "glide": "EQ",
+      "name": "Surface Rupture & Fissure",
+      "cluster": "Ground Failure",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-ear-gro"
+      ]
+    },
+    {
+      "undrr": "GH0401",
+      "glide": "OT",
+      "name": "Compressive Soils",
+      "cluster": "Other Hazards",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0402",
+      "glide": "OT",
+      "name": "Soil Degradation",
+      "cluster": "Other Hazards",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0403",
+      "glide": "OT",
+      "name": "Soil Erosion",
+      "cluster": "Other Hazards",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-env-soi"
+      ]
+    },
+    {
+      "undrr": "GH0404",
+      "glide": "OT",
+      "name": "River Erosion & Accretion",
+      "cluster": "Other Hazards",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0405",
+      "glide": "OT",
+      "name": "Coastal Erosion & Accretion",
+      "cluster": "Other Hazards",
+      "family": "Geological",
+      "emdat": [
+        "nat-geo-env-sed"
+      ]
+    },
+    {
+      "undrr": "GH0406",
+      "glide": "OT",
+      "name": "Sand Encroachment",
+      "cluster": "Other Hazards",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "GH0407",
+      "glide": "OT",
+      "name": "Ground Gases (CH4 Rn etc.)",
+      "cluster": "Other Hazards",
+      "family": "Geological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0101",
+      "glide": "ST",
+      "name": "Downburst",
+      "cluster": "Convective-Related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-sev"
+      ]
+    },
+    {
+      "undrr": "MH0102",
+      "glide": "ST",
+      "name": "Lightning (electrical storm)",
+      "cluster": "Convective-Related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-lig"
+      ]
+    },
+    {
+      "undrr": "MH0103",
+      "glide": "ST",
+      "name": "Thunderstorm",
+      "cluster": "Convective-Related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-sto"
+      ]
+    },
+    {
+      "undrr": "MH0201",
+      "glide": "VW",
+      "name": "Dust Storm or Sandstorm",
+      "cluster": "Particle-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-san"
+      ]
+    },
+    {
+      "undrr": "MH0202",
+      "glide": "OT",
+      "name": "Fog",
+      "cluster": "Particle-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-fog-fog"
+      ]
+    },
+    {
+      "undrr": "MH0203",
+      "glide": "OT",
+      "name": "Haze",
+      "cluster": "Particle-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0204",
+      "glide": "OT",
+      "name": "Sand Haze",
+      "cluster": "Particle-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0205",
+      "glide": "OT",
+      "name": "Smoke",
+      "cluster": "Particle-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0301",
+      "glide": "VW",
+      "name": "Wind",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-sto"
+      ]
+    },
+    {
+      "undrr": "MH0302",
+      "glide": "VW",
+      "name": "Derecho",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-der"
+      ]
+    },
+    {
+      "undrr": "MH0303",
+      "glide": "OT",
+      "name": "Gale",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0304",
+      "glide": "OT",
+      "name": "Squall",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0305",
+      "glide": "TO",
+      "name": "Tornado",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-tor"
+      ]
+    },
+    {
+      "undrr": "MH0306",
+      "glide": "TC",
+      "name": "Depression or Cyclone",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-tro"
+      ]
+    },
+    {
+      "undrr": "MH0307",
+      "glide": "EC",
+      "name": "Extra-tropical Cyclone",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-ext"
+      ]
+    },
+    {
+      "undrr": "MH0308",
+      "glide": "TC",
+      "name": "Sub-tropical Cyclone",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-tro"
+      ]
+    },
+    {
+      "undrr": "MH0309",
+      "glide": "TC",
+      "name": "Tropical Cyclone",
+      "cluster": "Wind & Pressure-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-tro"
+      ]
+    },
+    {
+      "undrr": "MH0401",
+      "glide": "DR",
+      "name": "Drought",
+      "cluster": "Precipitation-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-cli-dro-dro"
+      ]
+    },
+    {
+      "undrr": "MH0402",
+      "glide": "OT",
+      "name": "Rain",
+      "cluster": "Precipitation-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0403",
+      "glide": "OT",
+      "name": "Blizzard",
+      "cluster": "Precipitation-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-bli"
+      ]
+    },
+    {
+      "undrr": "MH0404",
+      "glide": "ST",
+      "name": "Hail",
+      "cluster": "Precipitation-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-hai"
+      ]
+    },
+    {
+      "undrr": "MH0405",
+      "glide": "OT",
+      "name": "Snow",
+      "cluster": "Precipitation-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0406",
+      "glide": "OT",
+      "name": "Snow Storm",
+      "cluster": "Precipitation-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0407",
+      "glide": "OT",
+      "name": "Ice Storm",
+      "cluster": "Precipitation-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0501",
+      "glide": "HT",
+      "name": "Heatwave",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-hea"
+      ]
+    },
+    {
+      "undrr": "MH0502",
+      "glide": "CW",
+      "name": "Cold Wave",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-col"
+      ]
+    },
+    {
+      "undrr": "MH0503",
+      "glide": "OT",
+      "name": "Dzud",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-sev"
+      ]
+    },
+    {
+      "undrr": "MH0504",
+      "glide": "OT",
+      "name": "Freeze",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-sev"
+      ]
+    },
+    {
+      "undrr": "MH0505",
+      "glide": "OT",
+      "name": "Frost (Hoar Frost)",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-sev"
+      ]
+    },
+    {
+      "undrr": "MH0506",
+      "glide": "OT",
+      "name": "Freezing Rain (Supercooled Rain)",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-sev"
+      ]
+    },
+    {
+      "undrr": "MH0507",
+      "glide": "OT",
+      "name": "Glaze",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-sev"
+      ]
+    },
+    {
+      "undrr": "MH0508",
+      "glide": "OT",
+      "name": "Ground Frost",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-sev"
+      ]
+    },
+    {
+      "undrr": "MH0509",
+      "glide": "OT",
+      "name": "Icing (Including Ice)",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-sev"
+      ]
+    },
+    {
+      "undrr": "MH0510",
+      "glide": "OT",
+      "name": "Thaw",
+      "cluster": "Temperature-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-ext-sev"
+      ]
+    },
+    {
+      "undrr": "MH0600",
+      "glide": "FL",
+      "name": "Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-flo"
+      ]
+    },
+    {
+      "undrr": "MH0601",
+      "glide": "FL",
+      "name": "Coastal Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-coa"
+      ]
+    },
+    {
+      "undrr": "MH0602",
+      "glide": "OT",
+      "name": "Estuarine (Coastal) Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0603",
+      "glide": "FF",
+      "name": "Flash Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-fla"
+      ]
+    },
+    {
+      "undrr": "MH0604",
+      "glide": "FL",
+      "name": "Fluvial (Riverine) Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-riv"
+      ]
+    },
+    {
+      "undrr": "MH0605",
+      "glide": "FL",
+      "name": "Groundwater Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-flo"
+      ]
+    },
+    {
+      "undrr": "MH0606",
+      "glide": "FL",
+      "name": "Surface water Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-flo"
+      ]
+    },
+    {
+      "undrr": "MH0607",
+      "glide": "FL",
+      "name": "Glacial Lake Outburst Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-cli-glo-glo"
+      ]
+    },
+    {
+      "undrr": "MH0608",
+      "glide": "FL",
+      "name": "Ice-Jam Flooding Including Debris",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-ice"
+      ]
+    },
+    {
+      "undrr": "MH0609",
+      "glide": "FL",
+      "name": "Ponding (Drainage) Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-flo"
+      ]
+    },
+    {
+      "undrr": "MH0610",
+      "glide": "FL",
+      "name": "Snowmelt Flooding",
+      "cluster": "Water-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-flo-flo"
+      ]
+    },
+    {
+      "undrr": "MH0701",
+      "glide": "OT",
+      "name": "Rogue Wave",
+      "cluster": "Marine-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-wav-rog"
+      ]
+    },
+    {
+      "undrr": "MH0702",
+      "glide": "OT",
+      "name": "Seiche",
+      "cluster": "Marine-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-wav-sei"
+      ]
+    },
+    {
+      "undrr": "MH0703",
+      "glide": "SS",
+      "name": "Storm Surge",
+      "cluster": "Marine-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-met-sto-sur"
+      ]
+    },
+    {
+      "undrr": "MH0704",
+      "glide": "SS",
+      "name": "Storm Tides",
+      "cluster": "Marine-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-hyd-wav-rog"
+      ]
+    },
+    {
+      "undrr": "MH0705",
+      "glide": "TS",
+      "name": "Tsunami",
+      "cluster": "Marine-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-geo-ear-tsu"
+      ]
+    },
+    {
+      "undrr": "MH0706",
+      "glide": "OT",
+      "name": "Sea ice",
+      "cluster": "Marine-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0707",
+      "glide": "OT",
+      "name": "Ice flow",
+      "cluster": "Marine-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0708",
+      "glide": "OT",
+      "name": "Marine Heatwave",
+      "cluster": "Marine-related",
+      "family": "Meteorological & Hydrological",
+      "emdat": []
+    },
+    {
+      "undrr": "MH0801",
+      "glide": "AV",
+      "name": "Avalanche",
+      "cluster": "Terrestrial",
+      "family": "Meteorological & Hydrological",
+      "emdat": [
+        "nat-geo-mmd-ava"
+      ]
+    },
+    {
+      "undrr": "SO0001",
+      "glide": "CE",
+      "name": "International Armed Conflict (IAC)",
+      "cluster": "Conflict",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "SO0002",
+      "glide": "CE",
+      "name": "Non-International Armed Conflict (NIAC)",
+      "cluster": "Conflict",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "SO0003",
+      "glide": "CE",
+      "name": "Civil Unrest",
+      "cluster": "Conflict",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "SO0004",
+      "glide": "CE",
+      "name": "Explosive Remnants of War",
+      "cluster": "Post-conflict",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "SO0005",
+      "glide": "CE",
+      "name": "Environmental Degradation from Conflict",
+      "cluster": "Post-conflict",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "SO0006",
+      "glide": "OT",
+      "name": "Violence",
+      "cluster": "Behavioural",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "SO0007",
+      "glide": "OT",
+      "name": "Stampede or Crushing (Human)",
+      "cluster": "Behavioural",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "SO0008",
+      "glide": "OT",
+      "name": "Financial shock",
+      "cluster": "Economic",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0001",
+      "glide": "AC",
+      "name": "Radioactive Waste",
+      "cluster": "Radiation",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-rad-rad"
+      ]
+    },
+    {
+      "undrr": "TL0002",
+      "glide": "AC",
+      "name": "Radioactive Material",
+      "cluster": "Radiation",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-rad-rad"
+      ]
+    },
+    {
+      "undrr": "TL0003",
+      "glide": "AC",
+      "name": "Radiation Agents",
+      "cluster": "Radiation",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-rad-rad"
+      ]
+    },
+    {
+      "undrr": "TL0004",
+      "glide": "AC",
+      "name": "Nuclear Agents",
+      "cluster": "Radiation",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-rad-rad"
+      ]
+    },
+    {
+      "undrr": "TL0005",
+      "glide": "AC",
+      "name": "Building Collapse",
+      "cluster": "Construction/Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0006",
+      "glide": "AC",
+      "name": "Building highrise cladding",
+      "cluster": "Construction/Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0007",
+      "glide": "AC",
+      "name": "Structural Failure",
+      "cluster": "Construction/Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0008",
+      "glide": "AC",
+      "name": "Bridge Failure",
+      "cluster": "Construction/Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0009",
+      "glide": "FL",
+      "name": "Dam Failure",
+      "cluster": "Construction/Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0010",
+      "glide": "AC",
+      "name": "Supply Chain Failure",
+      "cluster": "Construction/Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0011",
+      "glide": "AC",
+      "name": "Critical Infrastructure Failure",
+      "cluster": "Construction/Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0012",
+      "glide": "AC",
+      "name": "Nuclear Plant Failure",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-rad-rad"
+      ]
+    },
+    {
+      "undrr": "TL0013",
+      "glide": "AC",
+      "name": "Power Outage or Blackout",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0014",
+      "glide": "AC",
+      "name": "Emergency Telecommunications Failure",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0015",
+      "glide": "AC",
+      "name": "Water Supply Failure",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0016",
+      "glide": "AC",
+      "name": "Radio and Other Telecommunication Failures",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0017",
+      "glide": "OT",
+      "name": "Misconfiguration of Software and Hardware",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0018",
+      "glide": "OT",
+      "name": "Non-Conformity and Interoperability",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0019",
+      "glide": "OT",
+      "name": "Malware",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0020",
+      "glide": "OT",
+      "name": "Data Breach",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0021",
+      "glide": "OT",
+      "name": "Data Security-Related Hazards",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0022",
+      "glide": "OT",
+      "name": "Disrupt",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0023",
+      "glide": "OT",
+      "name": "Outage",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0024",
+      "glide": "OT",
+      "name": "Personally Identifiable Information (PII) Breach",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0025",
+      "glide": "OT",
+      "name": "Internet of Things (IOT)-Related Hazards",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0026",
+      "glide": "OT",
+      "name": "Cyberbullying",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0027",
+      "glide": "AC",
+      "name": "Natech",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0028",
+      "glide": "AC",
+      "name": "Pollution",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0029",
+      "glide": "AC",
+      "name": "Explosion",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-exp-exp"
+      ]
+    },
+    {
+      "undrr": "TL0030",
+      "glide": "AC",
+      "name": "Leaks and Spills",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-che-che"
+      ]
+    },
+    {
+      "undrr": "TL0031",
+      "glide": "AC",
+      "name": "Soil Pollution",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0032",
+      "glide": "FR",
+      "name": "Fire",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-fir-fir"
+      ]
+    },
+    {
+      "undrr": "TL0033",
+      "glide": "AC",
+      "name": "Mining Hazards",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0034",
+      "glide": "AC",
+      "name": "Safety Hazards Associated with Oil and Gas Extraction Activities",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0035",
+      "glide": "OT",
+      "name": "Disaster Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0036",
+      "glide": "OT",
+      "name": "Solid Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0037",
+      "glide": "OT",
+      "name": "Wastewater",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0038",
+      "glide": "OT",
+      "name": "Hazardous Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0039",
+      "glide": "OT",
+      "name": "Plastic Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0040",
+      "glide": "OT",
+      "name": "Marine Debris",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0041",
+      "glide": "OT",
+      "name": "Electronic Waste (E-Waste)",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0042",
+      "glide": "OT",
+      "name": "Healthcare Risk Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0043",
+      "glide": "OT",
+      "name": "Landfilling",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0044",
+      "glide": "OT",
+      "name": "Tailings",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0045",
+      "glide": "OT",
+      "name": "Waste Treatment Lagoons",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0046",
+      "glide": "OT",
+      "name": "Drain and Sewer Flooding",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0047",
+      "glide": "OT",
+      "name": "Reservoir Flooding",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0048",
+      "glide": "AC",
+      "name": "Air Transportation Accident",
+      "cluster": "Transportation Accidents",
+      "family": "Technological",
+      "emdat": [
+        "tec-tra-air-air"
+      ]
+    },
+    {
+      "undrr": "TL0049",
+      "glide": "AC",
+      "name": "Inland Water Ways",
+      "cluster": "Transportation Accidents",
+      "family": "Technological",
+      "emdat": [
+        "tec-tra-wat-wat"
+      ]
+    },
+    {
+      "undrr": "TL0050",
+      "glide": "AC",
+      "name": "Marine Accident",
+      "cluster": "Transportation Accidents",
+      "family": "Technological",
+      "emdat": [
+        "tec-tra-wat-wat"
+      ]
+    },
+    {
+      "undrr": "TL0051",
+      "glide": "AC",
+      "name": "Rail Accident",
+      "cluster": "Transportation Accidents",
+      "family": "Technological",
+      "emdat": [
+        "tec-tra-rai-rai"
+      ]
+    },
+    {
+      "undrr": "TL0052",
+      "glide": "AC",
+      "name": "Road Traffic Accident",
+      "cluster": "Transportation Accidents",
+      "family": "Technological",
+      "emdat": [
+        "tec-tra-roa-roa"
+      ]
+    },
+    {
+      "undrr": "TL0053",
+      "glide": "AC",
+      "name": "Explosive agents",
+      "cluster": "Radiation",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-exp-exp"
+      ]
     }
   ]
 }

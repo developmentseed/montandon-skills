@@ -92,18 +92,14 @@ TOOLS = [
         "function": {
             "name": "hazard_codes",
             "description": (
-                "Map a plain-language hazard term to UNDRR-ISC hazard codes. "
-                "Always call this first when the user mentions a hazard type."
+                "Return the full table of UNDRR-ISC hazard codes Montandon uses (no arguments). "
+                "Read the returned `name` fields yourself and match them to whatever hazard term "
+                "the user mentioned — always call this first when the user mentions a hazard type."
             ),
             "parameters": {
                 "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "Plain-language hazard term, e.g. 'flood', 'earthquake', 'cyclone'",
-                    }
-                },
-                "required": ["query"],
+                "properties": {},
+                "required": [],
             },
         },
     },
@@ -138,7 +134,7 @@ TOOLS = [
                     },
                     "hazard_code": {
                         "type": "string",
-                        "description": "UNDRR-ISC hazard code from hazard_codes(), e.g. 'MH0600' for flood",
+                        "description": "UNDRR-ISC hazard code copied from hazard_codes()'s result, e.g. 'MH0600' for flood",
                     },
                     "date_from": {
                         "type": "string",

@@ -24,8 +24,9 @@ def search_events(
         country_code:  ISO 3166-1 alpha-3 for a single country, e.g. "BGD"
         country_codes: List of ISO alpha-3 codes to match any of, e.g. ["AFG","PAK","IRN"].
                        Use this for regional queries. Supersedes country_code if both provided.
-        hazard_code:   UNDRR-ISC code, e.g. "MH0600" (flood), "GH0001" (earthquake).
-                       Use hazard_codes() to look up from plain language.
+        hazard_code:   UNDRR-ISC code, e.g. "MH0600" (flood), "GH0101" (earthquake).
+                       Call hazard_codes() to get the full code table and match plain
+                       language to a code yourself.
         date_from:     Start date "YYYY-MM-DD"
         date_to:       End date   "YYYY-MM-DD"
         sources:       Optional list of source names to restrict to, e.g. ["emdat", "gdacs"].
@@ -40,7 +41,8 @@ def search_events(
     Returns:
         Dict with keys:
           items:                list of trimmed event dicts (id, collection, corr_id, title,
-                                date, country_codes, hazard_codes, description)
+                                date, country_codes, hazard_codes) — no description; call
+                                get_event_detail on a corr_id for the full narrative text
           total_matched:        total matching records on the server (may exceed len(items))
           sources_queried:      all sources searched
           sources_with_results: sources represented in the returned items
@@ -50,7 +52,7 @@ def search_events(
         in v1 — the same disaster may appear once per source that recorded it.
         sources_with_results reflects the returned page; use total_matched to gauge coverage.
     """
-    available = _colls_by_type("-events", exclude_prefixes=("reference-",))
+    available = _colls_by_type("-events")
     if sources:
         colls = [f"{s}-events" for s in sources if f"{s}-events" in available]
     else:
