@@ -145,11 +145,14 @@
   "hazard_codes": [
     {
       "undrr": "BI0101",
-      "glide": "OT",
+      "glide": "EP",
       "name": "Airborne Diseases (human and Animal)",
       "cluster": "Infectious Diseases",
       "family": "Biological",
       "emdat": [
+        "nat-bio-epi-vir",
+        "nat-bio-epi-bac",
+        "nat-bio-epi-fun",
         "nat-bio-epi-dis"
       ]
     },
@@ -179,11 +182,13 @@
     },
     {
       "undrr": "BI0105",
-      "glide": "OT",
+      "glide": "EP",
       "name": "Neglected Tropical Diseases (Human)",
       "cluster": "Infectious Diseases",
       "family": "Biological",
-      "emdat": []
+      "emdat": [
+        "nat-bio-epi-par"
+      ]
     },
     {
       "undrr": "BI0106",
@@ -364,7 +369,7 @@
     {
       "undrr": "BI0215",
       "glide": "OT",
-      "name": "Human Influenza Pandemic",
+      "name": "Lassa Fever (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -372,7 +377,7 @@
     {
       "undrr": "BI0216",
       "glide": "OT",
-      "name": "Lassa Fever",
+      "name": "Leprosy (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -380,7 +385,7 @@
     {
       "undrr": "BI0217",
       "glide": "OT",
-      "name": "Malaria",
+      "name": "Leptospirosis (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -388,7 +393,7 @@
     {
       "undrr": "BI0218",
       "glide": "OT",
-      "name": "Measles",
+      "name": "Listeriosis (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -396,7 +401,7 @@
     {
       "undrr": "BI0219",
       "glide": "OT",
-      "name": "MERS-CoV",
+      "name": "Malaria (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -412,7 +417,7 @@
     {
       "undrr": "BI0221",
       "glide": "OT",
-      "name": "Monkeypox",
+      "name": "Measles (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -420,7 +425,7 @@
     {
       "undrr": "BI0222",
       "glide": "OT",
-      "name": "Nipah Virus",
+      "name": "Meningococcal Meningitis (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -428,7 +433,7 @@
     {
       "undrr": "BI0223",
       "glide": "OT",
-      "name": "Plague",
+      "name": "Middle East Respiratory Syndrome (MERS) (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -436,7 +441,7 @@
     {
       "undrr": "BI0224",
       "glide": "OT",
-      "name": "Poliomyelitis",
+      "name": "Mpox (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -444,7 +449,7 @@
     {
       "undrr": "BI0225",
       "glide": "OT",
-      "name": "Rabies",
+      "name": "Paratyphoid Fever (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -452,7 +457,7 @@
     {
       "undrr": "BI0226",
       "glide": "OT",
-      "name": "Rift Valley Fever",
+      "name": "Typhoid Fever (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -460,7 +465,7 @@
     {
       "undrr": "BI0227",
       "glide": "OT",
-      "name": "SARS",
+      "name": "Pertussis (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -468,7 +473,7 @@
     {
       "undrr": "BI0228",
       "glide": "OT",
-      "name": "Smallpox",
+      "name": "Plague (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -476,23 +481,25 @@
     {
       "undrr": "BI0229",
       "glide": "OT",
-      "name": "Tuberculosis",
+      "name": "Polio (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
     },
     {
       "undrr": "BI0230",
-      "glide": "OT",
-      "name": "Typhoid Fever",
+      "glide": "EP",
+      "name": "Prion Diseases",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
-      "emdat": []
+      "emdat": [
+        "nat-bio-epi-pri"
+      ]
     },
     {
       "undrr": "BI0231",
       "glide": "OT",
-      "name": "West Nile Virus",
+      "name": "Q Fever",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -500,7 +507,7 @@
     {
       "undrr": "BI0232",
       "glide": "OT",
-      "name": "Yellow Fever",
+      "name": "Rabies (Animal and Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -508,7 +515,7 @@
     {
       "undrr": "BI0233",
       "glide": "OT",
-      "name": "Zika Virus",
+      "name": "Rotavirus (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -516,7 +523,7 @@
     {
       "undrr": "BI0234",
       "glide": "OT",
-      "name": "Disease X",
+      "name": "Shigellosis (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -524,7 +531,7 @@
     {
       "undrr": "BI0235",
       "glide": "OT",
-      "name": "Avian Influenza (Bird Flu)",
+      "name": "Smallpox (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -532,7 +539,7 @@
     {
       "undrr": "BI0236",
       "glide": "OT",
-      "name": "Bovine Spongiform Encephalopathy (Mad Cow Disease)",
+      "name": "Severe Acute Respiratory Syndrome (SARS) (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -540,7 +547,7 @@
     {
       "undrr": "BI0237",
       "glide": "OT",
-      "name": "Foot and Mouth Disease",
+      "name": "Tuberculosis (Human and Animal)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -548,7 +555,7 @@
     {
       "undrr": "BI0238",
       "glide": "OT",
-      "name": "Screwworm",
+      "name": "Trypanosomiasis & Tripanomosis (Human and Animal)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -556,7 +563,7 @@
     {
       "undrr": "BI0239",
       "glide": "OT",
-      "name": "African Swine Fever",
+      "name": "Varicella and Herpes Zoster (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -564,7 +571,7 @@
     {
       "undrr": "BI0240",
       "glide": "OT",
-      "name": "Bluetongue",
+      "name": "West Nile Fever (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -572,7 +579,7 @@
     {
       "undrr": "BI0241",
       "glide": "OT",
-      "name": "Lumpy Skin Disease",
+      "name": "Yellow Fever (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -580,7 +587,7 @@
     {
       "undrr": "BI0242",
       "glide": "OT",
-      "name": "Newcastle Disease",
+      "name": "Zika Virus (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -588,7 +595,7 @@
     {
       "undrr": "BI0243",
       "glide": "OT",
-      "name": "Rinderpest",
+      "name": "Seasonal Influenza (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -596,7 +603,7 @@
     {
       "undrr": "BI0244",
       "glide": "OT",
-      "name": "Sheep and Goat Pox",
+      "name": "Pandemic Influenza (Human)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -604,7 +611,7 @@
     {
       "undrr": "BI0245",
       "glide": "OT",
-      "name": "Classical Swine Fever",
+      "name": "Avian Influenza (Human and Animal)",
       "cluster": "Specific Infectious Disease of Public Health Concern",
       "family": "Biological",
       "emdat": []
@@ -612,7 +619,7 @@
     {
       "undrr": "BI0301",
       "glide": "OT",
-      "name": "Locust Swarms",
+      "name": "Animal Diseases (Not Zoonoses)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -620,7 +627,7 @@
     {
       "undrr": "BI0302",
       "glide": "OT",
-      "name": "Desert Locust",
+      "name": "African Swine Fever (Animal)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -628,7 +635,7 @@
     {
       "undrr": "BI0303",
       "glide": "OT",
-      "name": "Migratory Locust",
+      "name": "Classical Swine Fever (Animal)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -636,7 +643,7 @@
     {
       "undrr": "BI0304",
       "glide": "OT",
-      "name": "Red Locust",
+      "name": "Contagious Bovine Pleuropneumonia (CBPP) (Animal)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -644,7 +651,7 @@
     {
       "undrr": "BI0305",
       "glide": "OT",
-      "name": "Brown Locust",
+      "name": "Contagious Caprine Pleuropneumonia (CCPP) (Animal)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -652,7 +659,7 @@
     {
       "undrr": "BI0306",
       "glide": "OT",
-      "name": "Italian Locust",
+      "name": "Foot and Mouth Disease Virus (Animal)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -660,7 +667,7 @@
     {
       "undrr": "BI0307",
       "glide": "OT",
-      "name": "Moroccan Locust",
+      "name": "Lumpy Skin Disease (Animal)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -668,7 +675,7 @@
     {
       "undrr": "BI0308",
       "glide": "OT",
-      "name": "Australian Plague Locust",
+      "name": "Newcastle Disease (Animal)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -676,7 +683,7 @@
     {
       "undrr": "BI0309",
       "glide": "OT",
-      "name": "Tree Locust",
+      "name": "New World Screwworm (NWS) (Animal)",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
@@ -684,87 +691,70 @@
     {
       "undrr": "BI0310",
       "glide": "OT",
-      "name": "Rocky Mountain Locust",
+      "name": "Peste des Petits Ruminants (Animal)",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0311",
+      "glide": "",
+      "name": "Rift Valley Fever (Animal)",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0312",
+      "glide": "",
+      "name": "Rinderpest (Animal)",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0313",
+      "glide": "",
+      "name": "Oyster Disease Aquaculture",
+      "cluster": "Animal Infectious Diseases",
+      "family": "Biological",
+      "emdat": []
+    },
+    {
+      "undrr": "BI0314",
+      "glide": "",
+      "name": "Shrimp Diseases (Bacterial) - Acute Hepatic Pancreatic Necrosis",
       "cluster": "Animal Infectious Diseases",
       "family": "Biological",
       "emdat": []
     },
     {
       "undrr": "BI0401",
-      "glide": "OT",
-      "name": "Bees (including Africanized Honeybees)",
+      "glide": "IN",
+      "name": "Insect Pest Infestations",
       "cluster": "Insect-related Diseases",
       "family": "Biological",
-      "emdat": []
+      "emdat": [
+        "nat-bio-inf-loc",
+        "nat-bio-inf-gra",
+        "nat-bio-inf-wor",
+        "nat-bio-inf-inf"
+      ]
     },
     {
       "undrr": "BI0402",
-      "glide": "OT",
-      "name": "Wasps",
+      "glide": "IN",
+      "name": "Locust",
       "cluster": "Insect-related Diseases",
       "family": "Biological",
-      "emdat": []
+      "emdat": [
+        "nat-bio-inf-loc"
+      ]
     },
     {
       "undrr": "BI0403",
       "glide": "OT",
-      "name": "Hornets",
-      "cluster": "Insect-related Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0404",
-      "glide": "OT",
-      "name": "Ants (including Fire Ants)",
-      "cluster": "Insect-related Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0405",
-      "glide": "OT",
-      "name": "Spiders",
-      "cluster": "Insect-related Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0406",
-      "glide": "OT",
-      "name": "Scorpions",
-      "cluster": "Insect-related Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0407",
-      "glide": "OT",
-      "name": "Ticks",
-      "cluster": "Insect-related Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0408",
-      "glide": "OT",
-      "name": "Mosquitoes",
-      "cluster": "Insect-related Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0409",
-      "glide": "OT",
-      "name": "Fleas",
-      "cluster": "Insect-related Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0410",
-      "glide": "OT",
-      "name": "Chiggers",
+      "name": "Invasive weed/species",
       "cluster": "Insect-related Diseases",
       "family": "Biological",
       "emdat": []
@@ -772,7 +762,7 @@
     {
       "undrr": "BI0501",
       "glide": "OT",
-      "name": "Plant Diseases (Agricultural)",
+      "name": "Bacterial Plant Disease",
       "cluster": "Plant Diseases",
       "family": "Biological",
       "emdat": []
@@ -780,7 +770,7 @@
     {
       "undrr": "BI0502",
       "glide": "OT",
-      "name": "Bacterial Plant Diseases",
+      "name": "Fungal Plant Disease",
       "cluster": "Plant Diseases",
       "family": "Biological",
       "emdat": []
@@ -788,63 +778,7 @@
     {
       "undrr": "BI0503",
       "glide": "OT",
-      "name": "Fungal Plant Diseases",
-      "cluster": "Plant Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0504",
-      "glide": "OT",
-      "name": "Viral Plant Diseases",
-      "cluster": "Plant Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0505",
-      "glide": "OT",
-      "name": "Nematode Plant Diseases",
-      "cluster": "Plant Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0506",
-      "glide": "OT",
-      "name": "Phytoplasma Plant Diseases",
-      "cluster": "Plant Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0507",
-      "glide": "OT",
-      "name": "Plant Rust",
-      "cluster": "Plant Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0508",
-      "glide": "OT",
-      "name": "Rice Blast",
-      "cluster": "Plant Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0509",
-      "glide": "OT",
-      "name": "Wheat Blast",
-      "cluster": "Plant Diseases",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0510",
-      "glide": "OT",
-      "name": "Citrus Greening",
+      "name": "Viral, Phytoplasma and Viroid Plant Disease Outbreaks",
       "cluster": "Plant Diseases",
       "family": "Biological",
       "emdat": []
@@ -852,7 +786,7 @@
     {
       "undrr": "BI0601",
       "glide": "OT",
-      "name": "Harmful Algal Blooms",
+      "name": "Antimicrobial Resistance",
       "cluster": "Other Biological Hazards",
       "family": "Biological",
       "emdat": []
@@ -860,7 +794,7 @@
     {
       "undrr": "BI0602",
       "glide": "OT",
-      "name": "Jellyfish Blooms",
+      "name": "Biological Agents CBRNE",
       "cluster": "Other Biological Hazards",
       "family": "Biological",
       "emdat": []
@@ -868,7 +802,7 @@
     {
       "undrr": "BI0603",
       "glide": "OT",
-      "name": "Mycotoxins",
+      "name": "Harmful Algal Blooms",
       "cluster": "Other Biological Hazards",
       "family": "Biological",
       "emdat": []
@@ -876,7 +810,7 @@
     {
       "undrr": "BI0604",
       "glide": "OT",
-      "name": "Snakes",
+      "name": "Human-Wildlife Conflict",
       "cluster": "Other Biological Hazards",
       "family": "Biological",
       "emdat": []
@@ -884,15 +818,7 @@
     {
       "undrr": "BI0605",
       "glide": "OT",
-      "name": "Marine Organisms",
-      "cluster": "Other Biological Hazards",
-      "family": "Biological",
-      "emdat": []
-    },
-    {
-      "undrr": "BI0606",
-      "glide": "OT",
-      "name": "Invasive Species",
+      "name": "Snakebite Envenoming",
       "cluster": "Other Biological Hazards",
       "family": "Biological",
       "emdat": []
@@ -963,11 +889,13 @@
     },
     {
       "undrr": "CH0203",
-      "glide": "OT",
+      "glide": "AC",
       "name": "Benzene & Hydrocarbons",
       "cluster": "Carcinogens",
       "family": "Chemical",
-      "emdat": []
+      "emdat": [
+        "tec-ind-oil-oil"
+      ]
     },
     {
       "undrr": "CH0300",
@@ -1059,11 +987,13 @@
     },
     {
       "undrr": "CH0602",
-      "glide": "OT",
+      "glide": "AC",
       "name": "Substandard & Falsified Medical Products",
       "cluster": "Chemical Hazards in Food and Pharmaceuticals",
       "family": "Chemical",
-      "emdat": []
+      "emdat": [
+        "tec-ind-poi-poi"
+      ]
     },
     {
       "undrr": "CH0603",
@@ -1200,6 +1130,8 @@
       "cluster": "Environmental Degradation",
       "family": "Environmental",
       "emdat": [
+        "nat-cli-wil-for",
+        "nat-cli-wil-lan",
         "nat-cli-wil-wil"
       ]
     },
@@ -1345,7 +1277,9 @@
       "name": "Solar Energetic Particles",
       "cluster": "Space Weather",
       "family": "Extraterrestrial",
-      "emdat": []
+      "emdat": [
+        "nat-ext-spa-ene"
+      ]
     },
     {
       "undrr": "ET0201",
@@ -1418,7 +1352,8 @@
       "cluster": "Volcanic",
       "family": "Geological",
       "emdat": [
-        "nat-geo-vol-lav"
+        "nat-geo-vol-lav",
+        "nat-geo-vol-vol"
       ]
     },
     {
@@ -1453,13 +1388,11 @@
     },
     {
       "undrr": "GH0205",
-      "glide": "VO",
+      "glide": "",
       "name": "Volcanic Gases and Aerosols",
       "cluster": "Volcanic",
       "family": "Geological",
-      "emdat": [
-        "nat-geo-vol-vol"
-      ]
+      "emdat": []
     },
     {
       "undrr": "GH0300",
@@ -1499,11 +1432,13 @@
     },
     {
       "undrr": "GH0304",
-      "glide": "OT",
+      "glide": "LS",
       "name": "Slides",
       "cluster": "Ground Failure",
       "family": "Geological",
-      "emdat": []
+      "emdat": [
+        "nat-hyd-mmw-lan"
+      ]
     },
     {
       "undrr": "GH0305",
@@ -1624,7 +1559,7 @@
     {
       "undrr": "GH0407",
       "glide": "OT",
-      "name": "Ground Gases (CH4 Rn etc.)",
+      "name": "Ground Gases (CH4, Rn, etc.)",
       "cluster": "Other Hazards",
       "family": "Geological",
       "emdat": []
@@ -1656,7 +1591,8 @@
       "cluster": "Convective-Related",
       "family": "Meteorological & Hydrological",
       "emdat": [
-        "nat-met-sto-sto"
+        "nat-met-sto-sto",
+        "nat-met-sto-sev"
       ]
     },
     {
@@ -1839,14 +1775,6 @@
       "undrr": "MH0406",
       "glide": "OT",
       "name": "Snow Storm",
-      "cluster": "Precipitation-related",
-      "family": "Meteorological & Hydrological",
-      "emdat": []
-    },
-    {
-      "undrr": "MH0407",
-      "glide": "OT",
-      "name": "Ice Storm",
       "cluster": "Precipitation-related",
       "family": "Meteorological & Hydrological",
       "emdat": []
@@ -2140,11 +2068,12 @@
       "cluster": "Terrestrial",
       "family": "Meteorological & Hydrological",
       "emdat": [
-        "nat-geo-mmd-ava"
+        "nat-geo-mmd-ava",
+        "nat-hyd-mmw-ava"
       ]
     },
     {
-      "undrr": "SO0001",
+      "undrr": "SO0101",
       "glide": "CE",
       "name": "International Armed Conflict (IAC)",
       "cluster": "Conflict",
@@ -2152,7 +2081,7 @@
       "emdat": []
     },
     {
-      "undrr": "SO0002",
+      "undrr": "SO0102",
       "glide": "CE",
       "name": "Non-International Armed Conflict (NIAC)",
       "cluster": "Conflict",
@@ -2160,7 +2089,7 @@
       "emdat": []
     },
     {
-      "undrr": "SO0003",
+      "undrr": "SO0103",
       "glide": "CE",
       "name": "Civil Unrest",
       "cluster": "Conflict",
@@ -2168,15 +2097,15 @@
       "emdat": []
     },
     {
-      "undrr": "SO0004",
+      "undrr": "SO0201",
       "glide": "CE",
-      "name": "Explosive Remnants of War",
+      "name": "Explosive Ordnance",
       "cluster": "Post-conflict",
       "family": "Societal",
       "emdat": []
     },
     {
-      "undrr": "SO0005",
+      "undrr": "SO0202",
       "glide": "CE",
       "name": "Environmental Degradation from Conflict",
       "cluster": "Post-conflict",
@@ -2184,7 +2113,7 @@
       "emdat": []
     },
     {
-      "undrr": "SO0006",
+      "undrr": "SO0301",
       "glide": "OT",
       "name": "Violence",
       "cluster": "Behavioural",
@@ -2192,7 +2121,7 @@
       "emdat": []
     },
     {
-      "undrr": "SO0007",
+      "undrr": "SO0302",
       "glide": "OT",
       "name": "Stampede or Crushing (Human)",
       "cluster": "Behavioural",
@@ -2200,265 +2129,234 @@
       "emdat": []
     },
     {
-      "undrr": "SO0008",
+      "undrr": "SO0303",
+      "glide": "",
+      "name": "Suicide Cluster",
+      "cluster": "Behavioural",
+      "family": "Societal",
+      "emdat": []
+    },
+    {
+      "undrr": "SO0401",
       "glide": "OT",
-      "name": "Financial shock",
+      "name": "Financial Shock",
       "cluster": "Economic",
       "family": "Societal",
       "emdat": []
     },
     {
-      "undrr": "TL0001",
-      "glide": "AC",
-      "name": "Radioactive Waste",
-      "cluster": "Radiation",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-rad-rad"
-      ]
-    },
-    {
-      "undrr": "TL0002",
-      "glide": "AC",
-      "name": "Radioactive Material",
-      "cluster": "Radiation",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-rad-rad"
-      ]
-    },
-    {
-      "undrr": "TL0003",
-      "glide": "AC",
-      "name": "Radiation Agents",
-      "cluster": "Radiation",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-rad-rad"
-      ]
-    },
-    {
-      "undrr": "TL0004",
-      "glide": "AC",
-      "name": "Nuclear Agents",
-      "cluster": "Radiation",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-rad-rad"
-      ]
-    },
-    {
-      "undrr": "TL0005",
-      "glide": "AC",
-      "name": "Building Collapse",
-      "cluster": "Construction/Structural Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-mis-col-col"
-      ]
-    },
-    {
-      "undrr": "TL0006",
-      "glide": "AC",
-      "name": "Building highrise cladding",
-      "cluster": "Construction/Structural Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-mis-col-col"
-      ]
-    },
-    {
-      "undrr": "TL0007",
-      "glide": "AC",
-      "name": "Structural Failure",
-      "cluster": "Construction/Structural Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-mis-col-col"
-      ]
-    },
-    {
-      "undrr": "TL0008",
-      "glide": "AC",
-      "name": "Bridge Failure",
-      "cluster": "Construction/Structural Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-mis-col-col"
-      ]
-    },
-    {
-      "undrr": "TL0009",
-      "glide": "FL",
-      "name": "Dam Failure",
-      "cluster": "Construction/Structural Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-mis-col-col"
-      ]
-    },
-    {
-      "undrr": "TL0010",
-      "glide": "AC",
-      "name": "Supply Chain Failure",
-      "cluster": "Construction/Structural Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-ind-ind"
-      ]
-    },
-    {
-      "undrr": "TL0011",
-      "glide": "AC",
-      "name": "Critical Infrastructure Failure",
-      "cluster": "Construction/Structural Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-ind-ind"
-      ]
-    },
-    {
-      "undrr": "TL0012",
-      "glide": "AC",
-      "name": "Nuclear Plant Failure",
-      "cluster": "Industrial Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-rad-rad"
-      ]
-    },
-    {
-      "undrr": "TL0013",
-      "glide": "AC",
-      "name": "Power Outage or Blackout",
-      "cluster": "Industrial Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-ind-ind"
-      ]
-    },
-    {
-      "undrr": "TL0014",
-      "glide": "AC",
-      "name": "Emergency Telecommunications Failure",
-      "cluster": "Industrial Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-ind-ind"
-      ]
-    },
-    {
-      "undrr": "TL0015",
-      "glide": "AC",
-      "name": "Water Supply Failure",
-      "cluster": "Industrial Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-ind-ind"
-      ]
-    },
-    {
-      "undrr": "TL0016",
-      "glide": "AC",
-      "name": "Radio and Other Telecommunication Failures",
-      "cluster": "Industrial Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-ind-ind"
-      ]
-    },
-    {
-      "undrr": "TL0017",
-      "glide": "OT",
-      "name": "Misconfiguration of Software and Hardware",
-      "cluster": "Cyberhazards",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0018",
-      "glide": "OT",
-      "name": "Non-Conformity and Interoperability",
-      "cluster": "Cyberhazards",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0019",
-      "glide": "OT",
+      "undrr": "TL0101",
+      "glide": "",
       "name": "Malware",
       "cluster": "Cyberhazards",
       "family": "Technological",
       "emdat": []
     },
     {
-      "undrr": "TL0020",
-      "glide": "OT",
+      "undrr": "TL0102",
+      "glide": "",
       "name": "Data Breach",
       "cluster": "Cyberhazards",
       "family": "Technological",
       "emdat": []
     },
     {
-      "undrr": "TL0021",
-      "glide": "OT",
-      "name": "Data Security-Related Hazards",
+      "undrr": "TL0103",
+      "glide": "",
+      "name": "Advanced Persistent Threat",
       "cluster": "Cyberhazards",
       "family": "Technological",
       "emdat": []
     },
     {
-      "undrr": "TL0022",
-      "glide": "OT",
-      "name": "Disrupt",
+      "undrr": "TL0104",
+      "glide": "",
+      "name": "Denial of Service",
       "cluster": "Cyberhazards",
       "family": "Technological",
       "emdat": []
     },
     {
-      "undrr": "TL0023",
-      "glide": "OT",
-      "name": "Outage",
+      "undrr": "TL0105",
+      "glide": "",
+      "name": "Supply Chain Attack",
       "cluster": "Cyberhazards",
       "family": "Technological",
       "emdat": []
     },
     {
-      "undrr": "TL0024",
-      "glide": "OT",
-      "name": "Personally Identifiable Information (PII) Breach",
-      "cluster": "Cyberhazards",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0025",
-      "glide": "OT",
-      "name": "Internet of Things (IOT)-Related Hazards",
-      "cluster": "Cyberhazards",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0026",
-      "glide": "OT",
+      "undrr": "TL0106",
+      "glide": "",
       "name": "Cyberbullying",
       "cluster": "Cyberhazards",
       "family": "Technological",
       "emdat": []
     },
     {
-      "undrr": "TL0027",
+      "undrr": "TL0107",
+      "glide": "",
+      "name": "Social Engineering",
+      "cluster": "Cyberhazards",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0201",
       "glide": "AC",
-      "name": "Natech",
-      "cluster": "Industrial Failure",
+      "name": "Building Collapse",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0202",
+      "glide": "AC",
+      "name": "Building, Highrise, Cladding",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0203",
+      "glide": "AC",
+      "name": "Structural Failure",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0204",
+      "glide": "AC",
+      "name": "Bridge Failure",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0205",
+      "glide": "FL",
+      "name": "Dam Failure",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-mis-col-col"
+      ]
+    },
+    {
+      "undrr": "TL0206",
+      "glide": "AC",
+      "name": "Supply Chain Failure",
+      "cluster": "Construction / Structural Failure",
       "family": "Technological",
       "emdat": [
         "tec-ind-ind-ind"
       ]
     },
     {
-      "undrr": "TL0028",
+      "undrr": "TL0207",
+      "glide": "AC",
+      "name": "Critical Infrastructure Failure",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0208",
+      "glide": "AC",
+      "name": "Nuclear Plant Failure",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-rad-rad"
+      ]
+    },
+    {
+      "undrr": "TL0209",
+      "glide": "AC",
+      "name": "Power Outage / Blackout",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0210",
+      "glide": "AC",
+      "name": "Water Supply Failure",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0211",
+      "glide": "AC",
+      "name": "Emergency Telecommunication Failure",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0212",
+      "glide": "AC",
+      "name": "Radio and other Telecommunication Failures",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
+    },
+    {
+      "undrr": "TL0213",
+      "glide": "",
+      "name": "Tunnel Failure",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0214",
+      "glide": "OT",
+      "name": "Drain and Sewer Flooding",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0215",
+      "glide": "OT",
+      "name": "Reservoir Flooding",
+      "cluster": "Construction / Structural Failure",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0301",
+      "glide": "AC",
+      "name": "Leaks and Spills",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-che-che",
+        "tec-ind-gas-gas"
+      ]
+    },
+    {
+      "undrr": "TL0302",
       "glide": "AC",
       "name": "Pollution",
       "cluster": "Industrial Failure",
@@ -2468,27 +2366,7 @@
       ]
     },
     {
-      "undrr": "TL0029",
-      "glide": "AC",
-      "name": "Explosion",
-      "cluster": "Industrial Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-exp-exp"
-      ]
-    },
-    {
-      "undrr": "TL0030",
-      "glide": "AC",
-      "name": "Leaks and Spills",
-      "cluster": "Industrial Failure",
-      "family": "Technological",
-      "emdat": [
-        "tec-ind-che-che"
-      ]
-    },
-    {
-      "undrr": "TL0031",
+      "undrr": "TL0303",
       "glide": "AC",
       "name": "Soil Pollution",
       "cluster": "Industrial Failure",
@@ -2498,17 +2376,38 @@
       ]
     },
     {
-      "undrr": "TL0032",
+      "undrr": "TL0304",
+      "glide": "AC",
+      "name": "Explosion",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-exp-exp"
+      ]
+    },
+    {
+      "undrr": "TL0305",
       "glide": "FR",
       "name": "Fire",
       "cluster": "Industrial Failure",
       "family": "Technological",
       "emdat": [
-        "tec-ind-fir-fir"
+        "tec-ind-fir-fir",
+        "tec-mis-fir-fir"
       ]
     },
     {
-      "undrr": "TL0033",
+      "undrr": "TL0306",
+      "glide": "AC",
+      "name": "Explosive Agents",
+      "cluster": "Industrial Failure",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-exp-exp"
+      ]
+    },
+    {
+      "undrr": "TL0307",
       "glide": "AC",
       "name": "Mining Hazards",
       "cluster": "Industrial Failure",
@@ -2518,7 +2417,7 @@
       ]
     },
     {
-      "undrr": "TL0034",
+      "undrr": "TL0308",
       "glide": "AC",
       "name": "Safety Hazards Associated with Oil and Gas Extraction Activities",
       "cluster": "Industrial Failure",
@@ -2528,111 +2427,17 @@
       ]
     },
     {
-      "undrr": "TL0035",
-      "glide": "OT",
-      "name": "Disaster Waste",
-      "cluster": "Waste",
+      "undrr": "TL0309",
+      "glide": "AC",
+      "name": "Natech",
+      "cluster": "Industrial Failure",
       "family": "Technological",
-      "emdat": []
+      "emdat": [
+        "tec-ind-ind-ind"
+      ]
     },
     {
-      "undrr": "TL0036",
-      "glide": "OT",
-      "name": "Solid Waste",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0037",
-      "glide": "OT",
-      "name": "Wastewater",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0038",
-      "glide": "OT",
-      "name": "Hazardous Waste",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0039",
-      "glide": "OT",
-      "name": "Plastic Waste",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0040",
-      "glide": "OT",
-      "name": "Marine Debris",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0041",
-      "glide": "OT",
-      "name": "Electronic Waste (E-Waste)",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0042",
-      "glide": "OT",
-      "name": "Healthcare Risk Waste",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0043",
-      "glide": "OT",
-      "name": "Landfilling",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0044",
-      "glide": "OT",
-      "name": "Tailings",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0045",
-      "glide": "OT",
-      "name": "Waste Treatment Lagoons",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0046",
-      "glide": "OT",
-      "name": "Drain and Sewer Flooding",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0047",
-      "glide": "OT",
-      "name": "Reservoir Flooding",
-      "cluster": "Waste",
-      "family": "Technological",
-      "emdat": []
-    },
-    {
-      "undrr": "TL0048",
+      "undrr": "TL0401",
       "glide": "AC",
       "name": "Air Transportation Accident",
       "cluster": "Transportation Accidents",
@@ -2642,9 +2447,9 @@
       ]
     },
     {
-      "undrr": "TL0049",
+      "undrr": "TL0402",
       "glide": "AC",
-      "name": "Inland Water Ways",
+      "name": "Inland Water Way Accidents",
       "cluster": "Transportation Accidents",
       "family": "Technological",
       "emdat": [
@@ -2652,9 +2457,9 @@
       ]
     },
     {
-      "undrr": "TL0050",
+      "undrr": "TL0403",
       "glide": "AC",
-      "name": "Marine Accident",
+      "name": "Maritime Accident",
       "cluster": "Transportation Accidents",
       "family": "Technological",
       "emdat": [
@@ -2662,7 +2467,7 @@
       ]
     },
     {
-      "undrr": "TL0051",
+      "undrr": "TL0404",
       "glide": "AC",
       "name": "Rail Accident",
       "cluster": "Transportation Accidents",
@@ -2672,7 +2477,7 @@
       ]
     },
     {
-      "undrr": "TL0052",
+      "undrr": "TL0405",
       "glide": "AC",
       "name": "Road Traffic Accident",
       "cluster": "Transportation Accidents",
@@ -2682,13 +2487,121 @@
       ]
     },
     {
-      "undrr": "TL0053",
+      "undrr": "TL0501",
+      "glide": "OT",
+      "name": "Disaster & Conflict Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0502",
+      "glide": "OT",
+      "name": "Solid Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0503",
+      "glide": "OT",
+      "name": "Wastewater",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0504",
+      "glide": "OT",
+      "name": "Hazardous Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0505",
+      "glide": "OT",
+      "name": "Plastic Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0506",
+      "glide": "OT",
+      "name": "Marine Debris",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0507",
+      "glide": "OT",
+      "name": "Electronic Waste (E-Waste)",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0508",
+      "glide": "OT",
+      "name": "Health-care Waste",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0509",
+      "glide": "OT",
+      "name": "Landfilling",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0510",
+      "glide": "OT",
+      "name": "Waste Treatment Lagoons",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0511",
+      "glide": "OT",
+      "name": "Tailings",
+      "cluster": "Waste",
+      "family": "Technological",
+      "emdat": []
+    },
+    {
+      "undrr": "TL0601",
       "glide": "AC",
-      "name": "Explosive agents",
+      "name": "Radioactive Waste",
       "cluster": "Radiation",
       "family": "Technological",
       "emdat": [
-        "tec-ind-exp-exp"
+        "tec-ind-rad-rad"
+      ]
+    },
+    {
+      "undrr": "TL0602",
+      "glide": "AC",
+      "name": "Radioactive Agents & Material",
+      "cluster": "Radiation",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-rad-rad"
+      ]
+    },
+    {
+      "undrr": "TL0603",
+      "glide": "AC",
+      "name": "Nuclear Agents",
+      "cluster": "Radiation",
+      "family": "Technological",
+      "emdat": [
+        "tec-ind-rad-rad"
       ]
     }
   ]

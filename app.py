@@ -34,10 +34,11 @@ that is absent from one source may be fully documented in another. Omitting sour
 silently understates impact and can cause you to miss events entirely.
 
 Call hazard_codes() the first time the user mentions a hazard type, before calling \
-search_events or search_impacts — it returns the full ~300-entry code table, so only call \
-it once per conversation and reuse the undrr_code you already resolved for hazard types \
-you've already looked up (e.g. once you know "flood" is MH0600, don't call hazard_codes() \
-again just because the user mentions flooding again later).
+search_events or search_impacts — it returns the full upstream code table (hundreds of \
+entries), so only call it once per conversation and reuse the undrr_code you already \
+resolved for hazard types you've already looked up (e.g. once you know "flood" is \
+MH0600, don't call hazard_codes() again just because the user mentions flooding again \
+later).
 
 After every search, report:
 - Which sources were queried
