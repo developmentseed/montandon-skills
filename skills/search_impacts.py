@@ -32,7 +32,7 @@ def search_impacts(
     Search for events meeting impact thresholds (deaths, displaced, etc.).
 
     Args:
-        hazard_code:    UNDRR-ISC code, e.g. "GH0001" (earthquake). Use hazard_codes() for lookup.
+        hazard_code:    UNDRR-ISC code, e.g. "GH0101" (earthquake). Call hazard_codes() for the code table.
         date_from:      Start date "YYYY-MM-DD"
         date_to:        End date   "YYYY-MM-DD"
         min_deaths:     Minimum reported deaths (filters on impact_detail.type='death').

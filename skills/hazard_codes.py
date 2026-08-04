@@ -1,7 +1,9 @@
 """
-Map plain-language hazard terms to UNDRR-ISC 2025 codes.
-Self-contained — no API calls, no montandon_core dependency.
-Taxonomy source: skills/taxonomy.json
+Authoritative UNDRR-ISC 2025 hazard code table — the full upstream taxonomy,
+unfiltered. Self-contained — no API calls, no montandon_core dependency.
+Taxonomy source: skills/taxonomy.json, regenerated via
+scripts/generate_taxonomy.py from pystac-monty's HazardProfiles.csv:
+https://github.com/IFRCGo/pystac-monty
 """
 import json
 from pathlib import Path
@@ -14,42 +16,36 @@ EMDAT_CODES: dict[str, list[str]] = {
     h["undrr"]: h["emdat"] for h in _hazard_data if h.get("emdat")
 }
 
-# UNDRR-ISC → GLIDE codes (auto-derived from taxonomy)
-GLIDE_CODES: dict[str, list[str]] = {}
-for _h in _hazard_data:
-    _undrr, _glide = _h["undrr"], _h["glide"]
-    if _undrr not in GLIDE_CODES:
-        GLIDE_CODES[_undrr] = []
-    if _glide not in GLIDE_CODES[_undrr]:
-        GLIDE_CODES[_undrr].append(_glide)
+# UNDRR-ISC → GLIDE codes (for hazard filter expansion in search functions)
+GLIDE_CODES: dict[str, list[str]] = {h["undrr"]: [h["glide"]] for h in _hazard_data}
 
 
-def hazard_codes(query: str) -> list[dict]:
+def hazard_codes() -> list[dict]:
     """
-    Look up UNDRR-ISC hazard codes by plain-language term.
+    Full UNDRR-ISC 2025 hazard code table — every code upstream defines, not just the
+    ones seen in Montandon data so far (new sources or newly-ingested hazard types
+    won't be silently unsearchable).
 
-    Args:
-        query: natural language term, e.g. "flood", "earthquake", "cyclone"
+    Not a search function — it returns every entry unfiltered. Read the `name` field
+    yourself and pick the code(s) that match the user's plain-language term; a term like
+    "hurricane" or "typhoon" won't appear verbatim in the table but clearly means
+    "Tropical Cyclone". If more than one entry is plausible (e.g. "storm" could mean
+    several convective hazard types), ask the user to clarify before querying — never
+    guess an undrr_code from memory, always copy it from this returned list.
 
     Returns:
-        List of {undrr_code, glide_code, name, emdat_codes} matches. May include multiple
-        entries for ambiguous terms — Claude should surface all and ask the user
-        to clarify if more than one is plausible.
+        List of {undrr_code, glide_code, name, cluster, family, emdat_codes}, spanning
+        all UNDRR-ISC 2025 families: meteorological/hydrological, geological,
+        environmental, chemical, biological, technological, societal, extraterrestrial.
     """
-    q = query.lower().strip()
-    seen: set[str] = set()
-    results = []
-    for h in _hazard_data:
-        undrr = h["undrr"]
-        synonyms = h.get("synonyms", [])
-        name = h["name"]
-        if any(q in s or s in q for s in synonyms + [name.lower()]):
-            if undrr not in seen:
-                seen.add(undrr)
-                results.append({
-                    "undrr_code": undrr,
-                    "glide_code": h["glide"],
-                    "name": name,
-                    "emdat_codes": h.get("emdat", []),
-                })
-    return results
+    return [
+        {
+            "undrr_code": h["undrr"],
+            "glide_code": h["glide"],
+            "name": h["name"],
+            "cluster": h["cluster"],
+            "family": h["family"],
+            "emdat_codes": h.get("emdat", []),
+        }
+        for h in _hazard_data
+    ]

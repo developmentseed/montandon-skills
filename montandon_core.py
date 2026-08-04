@@ -119,6 +119,7 @@ def _or(*clauses) -> dict:
 # ---------------------------------------------------------------------------
 
 def _trim_event(item: dict) -> dict:
+    """Minimal event summary for bulk search results — no description (see _trim_event_detail)."""
     p = item.get("properties", {})
     return {
         "id": item.get("id"),
@@ -128,7 +129,14 @@ def _trim_event(item: dict) -> dict:
         "date": p.get("datetime") or p.get("start_datetime"),
         "country_codes": p.get("monty:country_codes", []),
         "hazard_codes": p.get("monty:hazard_codes", []),
-        "description": (p.get("description") or "")[:200] or None,
+    }
+
+
+def _trim_event_detail(item: dict) -> dict:
+    """Single-event detail — includes the full, untruncated description."""
+    return {
+        **_trim_event(item),
+        "description": item.get("properties", {}).get("description"),
     }
 
 
@@ -174,8 +182,13 @@ _EVENT_FIELDS: dict = {
         "id", "collection",
         "properties.title", "properties.datetime", "properties.start_datetime",
         "properties.monty:corr_id", "properties.monty:country_codes",
-        "properties.monty:hazard_codes", "properties.description",
+        "properties.monty:hazard_codes",
     ],
+    "exclude": ["geometry", "assets", "links", "bbox"],
+}
+
+_EVENT_DETAIL_FIELDS: dict = {
+    "include": _EVENT_FIELDS["include"] + ["properties.description"],
     "exclude": ["geometry", "assets", "links", "bbox"],
 }
 
@@ -222,24 +235,20 @@ def _available_collections() -> list[str]:
     if _cached_collections is not None:
         return _cached_collections
     colls = []
-    path = "/collections"
-    while path:
-        d = _get(path)
-        colls.extend(c["id"] for c in d.get("collections", []))
+    d = _get("/collections")
+    colls.extend(c["id"] for c in d.get("collections", []))
+    while True:
         nxt = next((l["href"] for l in d.get("links", []) if l.get("rel") == "next"), None)
-        if nxt:
-            r = _get_session().get(nxt, timeout=30)
-            r.raise_for_status()
-            d = r.json()
-            colls.extend(c["id"] for c in d.get("collections", []))
-        path = None
+        if not nxt:
+            break
+        r = _get_session().get(nxt, timeout=30)
+        r.raise_for_status()
+        d = r.json()
+        colls.extend(c["id"] for c in d.get("collections", []))
     _cached_collections = colls
     return colls
 
 
-def _colls_by_type(suffix: str, exclude_prefixes: tuple[str, ...] = ()) -> list[str]:
-    """Return live collection IDs ending with suffix, excluding any with given prefixes."""
-    return [
-        c for c in _available_collections()
-        if c.endswith(suffix) and not any(c.startswith(p) for p in exclude_prefixes)
-    ]
+def _colls_by_type(suffix: str) -> list[str]:
+    """Return all live collection IDs ending with suffix."""
+    return [c for c in _available_collections() if c.endswith(suffix)]

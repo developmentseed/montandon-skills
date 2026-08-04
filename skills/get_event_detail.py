@@ -2,8 +2,8 @@
 Fetch full detail for a single disaster event: metadata, hazards, and impacts.
 """
 from montandon_core import (
-    _eq, _post_search, _trim_event, _trim_hazard, _trim_impact,
-    _colls_by_type, _EVENT_FIELDS, _HAZARD_FIELDS, _IMPACT_FIELDS,
+    _eq, _post_search, _trim_event_detail, _trim_hazard, _trim_impact,
+    _colls_by_type, _EVENT_DETAIL_FIELDS, _HAZARD_FIELDS, _IMPACT_FIELDS,
 )
 
 
@@ -19,7 +19,8 @@ def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
 
     Returns:
         Dict with keys:
-          event:    trimmed event dict (from the specified or first-found source)
+          event:    trimmed event dict (from the specified or first-found source), including
+                    the full, untruncated source description
           hazards:  list of trimmed hazard dicts across all sources (may be empty)
           impacts:  list of trimmed impact dicts across all sources (each is one typed estimate row)
 
@@ -31,7 +32,7 @@ def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
     """
     event_colls = (
         [collection] if collection
-        else _colls_by_type("-events", exclude_prefixes=("reference-",))
+        else _colls_by_type("-events")
     )
 
     feats = _post_search({
@@ -39,7 +40,7 @@ def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
         "filter-lang": "cql2-json",
         "filter": _eq("monty:corr_id", corr_id),
         "limit": 1,
-        "fields": _EVENT_FIELDS,
+        "fields": _EVENT_DETAIL_FIELDS,
     }).get("features", [])
 
     if not feats:
@@ -82,7 +83,7 @@ def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
             pass
 
     return {
-        "event": _trim_event(feats[0]),
+        "event": _trim_event_detail(feats[0]),
         "hazards": hazards,
         "impacts": impacts,
     }
