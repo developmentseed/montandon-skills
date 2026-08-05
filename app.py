@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import time
 
 import chainlit as cl
 from deepeval.tracing import observe, update_current_span
@@ -300,16 +301,26 @@ async def run_agent(messages: list[dict], model: str = MODEL, on_tool_call=None)
     Chainlit UI and the eval suite. Returns the full message list (including tool
     calls/results) and a flat log of {name, arguments} for deterministic checks.
     `on_tool_call(name, arguments, result)` is awaited after each tool call, if given —
-    Chainlit uses it to render a live cl.Step.
+    Chainlit uses it to render a live cl.Step. Also returns `wall_time_s` (whole loop,
+    including tool execution) and `usage` (summed OpenRouter cost/tokens across every LLM
+    call in the loop) — used by the eval suite to compare models on speed and cost, not
+    just correctness.
     """
     tool_call_log = []
+    usage = {"cost_usd": 0.0, "prompt_tokens": 0, "completion_tokens": 0}
+    start = time.perf_counter()
 
     while True:
         response = await client.chat.completions.create(
             model=model,
             messages=messages,
             tools=TOOLS,
+            extra_body={"usage": {"include": True}},
         )
+        if response.usage is not None:
+            usage["cost_usd"] += getattr(response.usage, "cost", 0.0) or 0.0
+            usage["prompt_tokens"] += response.usage.prompt_tokens or 0
+            usage["completion_tokens"] += response.usage.completion_tokens or 0
         assistant = response.choices[0].message
 
         assistant_dict = {"role": "assistant", "content": assistant.content}
@@ -352,6 +363,8 @@ async def run_agent(messages: list[dict], model: str = MODEL, on_tool_call=None)
         "content": assistant.content or "",
         "messages": messages,
         "tool_calls": tool_call_log,
+        "wall_time_s": time.perf_counter() - start,
+        "usage": usage,
     }
 
 

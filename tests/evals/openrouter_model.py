@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 from deepeval.models import DeepEvalBaseLLM
 
-DEFAULT_JUDGE_MODEL = "openai/gpt-4o-mini"
+DEFAULT_JUDGE_MODEL = "anthropic/claude-sonnet-5"
 
 
 class OpenRouterModel(DeepEvalBaseLLM):

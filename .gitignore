@@ -4,3 +4,4 @@ __pycache__/
 .venv/
 .chainlit
 .deepeval/
+tests/evals/results/
