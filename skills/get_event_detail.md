@@ -26,6 +26,11 @@ Full record for one event: metadata plus all cross-source hazards and impacts.
 
 ## Note on corr_id semantics
 
-`monty:corr_id` is a cross-source identifier — it pairs all items (events, hazards, impacts) for
-the same real-world event across sources. This skill queries hazards and impacts across all
-source collections, not just the collection the event was found in.
+`monty:corr_id` is deterministic **per source**, not a cross-source join key. Two sources
+describing the same real-world event can produce **different** corr_ids — country resolution,
+hazard normalization, block_id, or episode number can differ between sources. This skill queries
+hazards and impacts across all source collections, but by **exact corr_id match** — so it
+reliably returns everything chained to that corr_id, but may miss another source's record of the
+same event if that source generated a different corr_id. To find all sources covering one
+real-world event, call `search_events` with the same hazard code, country, and date range rather
+than assuming one corr_id is exhaustive.

@@ -3,6 +3,7 @@ import json
 import os
 
 import chainlit as cl
+from deepeval.tracing import observe, update_current_span
 from openai import AsyncOpenAI
 
 from skills.get_event_detail import get_event_detail
@@ -11,7 +12,7 @@ from skills.list_sources import list_sources
 from skills.search_events import search_events
 from skills.search_impacts import search_impacts
 
-MODEL = os.getenv("OPENROUTER_MODEL", "deepseek/deepseek-v4-pro")
+MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-5.6-luna-pro")
 
 client = AsyncOpenAI(
     api_key=os.getenv("OPENROUTER_API_KEY") or "not-set",
@@ -33,12 +34,23 @@ sources have different coverage gaps and ingestion lags; a storm, flood, or eart
 that is absent from one source may be fully documented in another. Omitting sources \
 silently understates impact and can cause you to miss events entirely.
 
+When the user DOES name a source explicitly (e.g. "using only EM-DAT", "just GDACS \
+alerts"), you MUST pass sources= with that source's key from the list below (e.g. \
+sources=["emdat"]) — restricting is correct here, and skipping the sources= argument \
+in this case silently ignores the user's instruction and queries everything instead.
+
 Call hazard_codes() the first time the user mentions a hazard type, before calling \
 search_events or search_impacts — it returns the full upstream code table (hundreds of \
 entries), so only call it once per conversation and reuse the undrr_code you already \
 resolved for hazard types you've already looked up (e.g. once you know "flood" is \
 MH0600, don't call hazard_codes() again just because the user mentions flooding again \
 later).
+
+Some plain-language hazard terms are ambiguous — e.g. "storm" could mean lightning, \
+thunderstorm, dust/sandstorm, snow storm, storm surge, or storm tides, none of which is \
+the same as tropical cyclone. When a term maps to multiple plausible hazard codes, ASK \
+the user which one they mean before calling search_events or search_impacts — do not \
+silently guess one code, and do not call search multiple times to cover every guess.
 
 After every search, report:
 - Which sources were queried
@@ -52,6 +64,12 @@ retrieved; this list may be incomplete." Never bury this in a footnote.
 For ranking questions or requests for precise measurements (strongest, deadliest, largest, \
 fastest, etc.), call get_event_detail on the top candidates to retrieve structured hazard \
 severity fields — do not rely solely on freetext descriptions.
+
+For questions asking which sources have data on a specific event (or to confirm cross-source \
+coverage), call get_event_detail on the matching corr_id(s) from search_events rather than \
+inferring source coverage from search_events results alone — search_events results only show \
+each source's own record, while get_event_detail's hazards/impacts arrays reveal which other \
+sources actually have linked data.
 
 Sources are complementary, not interchangeable — each has unique coverage and lags:
 - emdat — deaths, affected, economic loss (historical; comprehensive but slow to update)
@@ -70,15 +88,19 @@ Sources are complementary, not interchangeable — each has unique coverage and 
 (e.g. a value of 500 = $500,000)
 - Impact rows are typed (death, displaced_total, etc.) — multiple rows per event is normal; \
 group them by type when summarising
-- monty:corr_id links the same real-world event across sources — use it with get_event_detail \
-to fetch full hazard and impact records
+- monty:corr_id is deterministic per source, NOT a cross-source join key — two sources describing \
+the same real-world event can produce different corr_ids (country resolution, hazard \
+normalization, block_id, or episode number can differ). get_event_detail queries hazards/impacts \
+across all source collections by exact corr_id match, so don't assume one call surfaced every \
+source's data on an event
 
 ## Limitations
 
 - Absence of results does not mean the event didn't happen — data completeness varies by source
 - The same event may appear once per source (cross-source deduplication is in progress)
-- For IDMC displacement queries, omit hazard_code — IDMC tags records with a generic code \
-that won't match specific hazards, silently excluding them
+- For IDMC displacement queries, omit the hazard_code argument entirely — do not pass it as an \
+empty string or null, leave the key out of the tool call — IDMC tags records with a generic \
+code that won't match specific hazards, silently excluding them
 - Always tell the user which source(s) and hazard code you used
 
 ## Response guidelines
@@ -127,6 +149,8 @@ TOOLS = [
                 "Search for disaster events across ALL sources by country, hazard type, and/or date range. "
                 "NEVER pass sources= unless the user explicitly names one — different sources have "
                 "different coverage gaps and ingestion lags, so restricting sources can silently miss events. "
+                "If the user DOES name a source explicitly, you MUST pass sources= with that source's key "
+                "(e.g. sources=['emdat']) — leaving it out ignores their instruction. "
                 "For annual or multi-month queries, pass limit=500 to avoid missing events in the middle of the date range."
             ),
             "parameters": {
@@ -152,6 +176,14 @@ TOOLS = [
                         "type": "integer",
                         "description": "Max results (default 50)",
                         "default": 50,
+                    },
+                    "sources": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": (
+                            "Restrict to specific source keys, e.g. ['emdat']. Only pass this when "
+                            "the user explicitly names a source — otherwise omit it to query all sources."
+                        ),
                     },
                 },
                 "required": [],
@@ -179,7 +211,10 @@ TOOLS = [
                     },
                     "hazard_code": {
                         "type": "string",
-                        "description": "UNDRR-ISC hazard code. Omit for IDMC displacement queries.",
+                        "description": (
+                            "UNDRR-ISC hazard code. For IDMC displacement queries, do not include "
+                            "this key at all — not even as an empty string."
+                        ),
                     },
                     "date_from": {
                         "type": "string",
@@ -201,6 +236,14 @@ TOOLS = [
                         "type": "integer",
                         "description": "Max results (default 50)",
                         "default": 50,
+                    },
+                    "sources": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": (
+                            "Restrict to specific source keys, e.g. ['emdat']. Only pass this when "
+                            "the user explicitly names a source — otherwise omit it to query all sources."
+                        ),
                     },
                 },
                 "required": [],
@@ -238,28 +281,32 @@ SKILL_MAP = {
     "get_event_detail": get_event_detail,
 }
 
-@cl.password_auth_callback
-def auth_callback(username: str, password: str):
-    if (username, password) == (os.getenv("CHAINLIT_USER"), os.getenv("CHAINLIT_PASSWORD")):
-        return cl.User(
-            identifier="admin", metadata={"role": "admin", "provider": "credentials"}
-        )
-    else:
-        return None
-
-@cl.on_chat_start
-async def on_chat_start():
-    cl.user_session.set("messages", [{"role": "system", "content": SYSTEM_PROMPT}])
+@observe(type="tool")
+async def call_tool(fn_name: str, fn_args: dict):
+    update_current_span(name=fn_name, input=fn_args)
+    try:
+        result = await asyncio.to_thread(SKILL_MAP[fn_name], **fn_args)
+    except Exception as e:
+        result = {"error": str(e)}
+    update_current_span(output=result)
+    return result
 
 
-@cl.on_message
-async def on_message(message: cl.Message):
-    messages = cl.user_session.get("messages")
-    messages.append({"role": "user", "content": message.content})
+@observe(type="agent", name="montandon_agent")
+async def run_agent(messages: list[dict], model: str = MODEL, on_tool_call=None) -> dict:
+    """Drive the tool-calling loop against `messages` and return the final state.
+
+    Framework-agnostic (no Chainlit dependency) so it can be called from both the
+    Chainlit UI and the eval suite. Returns the full message list (including tool
+    calls/results) and a flat log of {name, arguments} for deterministic checks.
+    `on_tool_call(name, arguments, result)` is awaited after each tool call, if given —
+    Chainlit uses it to render a live cl.Step.
+    """
+    tool_call_log = []
 
     while True:
         response = await client.chat.completions.create(
-            model=MODEL,
+            model=model,
             messages=messages,
             tools=TOOLS,
         )
@@ -286,14 +333,11 @@ async def on_message(message: cl.Message):
         for tc in assistant.tool_calls:
             fn_name = tc.function.name
             fn_args = json.loads(tc.function.arguments)
+            tool_call_log.append({"name": fn_name, "arguments": fn_args})
 
-            async with cl.Step(name=fn_name, type="tool") as step:
-                step.input = fn_args
-                try:
-                    result = await asyncio.to_thread(SKILL_MAP[fn_name], **fn_args)
-                except Exception as e:
-                    result = {"error": str(e)}
-                step.output = result
+            result = await call_tool(fn_name, fn_args)
+            if on_tool_call is not None:
+                await on_tool_call(fn_name, fn_args, result)
 
             messages.append(
                 {
@@ -303,5 +347,39 @@ async def on_message(message: cl.Message):
                 }
             )
 
-    cl.user_session.set("messages", messages)
-    await cl.Message(content=assistant.content or "").send()
+    update_current_span(output=assistant.content)
+    return {
+        "content": assistant.content or "",
+        "messages": messages,
+        "tool_calls": tool_call_log,
+    }
+
+
+@cl.password_auth_callback
+def auth_callback(username: str, password: str):
+    if (username, password) == (os.getenv("CHAINLIT_USER"), os.getenv("CHAINLIT_PASSWORD")):
+        return cl.User(
+            identifier="admin", metadata={"role": "admin", "provider": "credentials"}
+        )
+    else:
+        return None
+
+@cl.on_chat_start
+async def on_chat_start():
+    cl.user_session.set("messages", [{"role": "system", "content": SYSTEM_PROMPT}])
+
+
+@cl.on_message
+async def on_message(message: cl.Message):
+    messages = cl.user_session.get("messages")
+    messages.append({"role": "user", "content": message.content})
+
+    async def render_step(fn_name, fn_args, result):
+        async with cl.Step(name=fn_name, type="tool") as step:
+            step.input = fn_args
+            step.output = result
+
+    result = await run_agent(messages, on_tool_call=render_step)
+
+    cl.user_session.set("messages", result["messages"])
+    await cl.Message(content=result["content"]).send()

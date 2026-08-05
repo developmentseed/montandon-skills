@@ -25,9 +25,13 @@ def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
           impacts:  list of trimmed impact dicts across all sources (each is one typed estimate row)
 
     Note:
-        monty:corr_id pairs all items for the same real-world event across sources.
-        Hazards and impacts are returned from ALL sources, not just the event's source —
-        use the 'collection' field on each row to identify its origin.
+        monty:corr_id is deterministic PER SOURCE, not a cross-source join key — two sources
+        describing the same real-world event can produce different corr_ids (country
+        resolution, hazard normalization, block_id, or episode number can differ). This
+        function queries hazards/impacts across ALL source collections by exact corr_id
+        match, so it reliably returns everything chained to *that* corr_id, but may miss
+        another source's record of the same event if that source generated a different
+        corr_id — use the 'collection' field on each row to identify its origin.
         Group impacts by impact_type to summarise; EM-DAT 'cost' rows are thousands of USD.
     """
     event_colls = (

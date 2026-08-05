@@ -1,0 +1,156 @@
+[
+  {
+    "name": "turkey-earthquake-2023-cost",
+    "input": "What was the financial cost of the 2023 Turkey earthquake?",
+    "additional_metadata": {
+      "verified": true,
+      "grounded_in": "Live chainlit transcript this session: hazard code GH0101 (Earthquake), EM-DAT recorded 34,000,000 thousand USD -> $34,000,000,000, corr_id 20230206-TUR-NAT-GEO-EAR-GRO-1-GCDB. A USGS modelled estimate (~$41B) must not be summed with the EM-DAT figure.",
+      "tool_checks": [
+        {"name": "hazard_codes", "count": 1},
+        {"name": "search_impacts", "args_present": {"hazard_code": "GH0101"}},
+        {"name": "get_event_detail", "count_at_least": 1}
+      ],
+      "content_checks": [
+        "States the EM-DAT cost as approximately $34 billion (34,000,000 thousand USD x 1,000)",
+        "Explicitly shows or states the x1,000 conversion, not just the raw thousands figure",
+        "If a USGS or other non-EM-DAT cost estimate is also mentioned, it is kept separate and not added to the EM-DAT figure",
+        "States which source(s) the cost figure came from (EM-DAT)"
+      ]
+    }
+  },
+  {
+    "name": "spain-wildfires-2020",
+    "input": "Tell me about wildfires in Spain in 2020.",
+    "additional_metadata": {
+      "verified": false,
+      "grounded_in": "Hazard code EN0205 (Wildfires) verified against taxonomy.json. 2020 volume is unverified against the live API this session.",
+      "tool_checks": [
+        {"name": "hazard_codes", "count": 1},
+        {"name": "search_events", "args_present": {"hazard_code": "EN0205", "country_code": "ESP"}, "args_falsy": ["sources"], "limit_at_least": 500}
+      ],
+      "content_checks": [
+        "States sources_queried, sources_with_results, and total_matched",
+        "If total_matched exceeds the number of items returned, a truncation note appears prominently near the top of the response, not buried at the end",
+        "If results are empty or sparse, says so explicitly rather than speculating about real-world 2020 Spain wildfires"
+      ]
+    }
+  },
+  {
+    "name": "tsunamis-2000s-ranked-by-impact",
+    "input": "What were the most impactful tsunamis in the 2000s, ranked by how many people were affected?",
+    "additional_metadata": {
+      "verified": false,
+      "grounded_in": "Hazard code MH0705 (Tsunami) verified against taxonomy.json. Specific event lists are not independently confirmed against Montandon this session.",
+      "tool_checks": [
+        {"name": "hazard_codes", "count": 1},
+        {"name": "search_events", "args_present": {"hazard_code": "MH0705"}, "args_falsy": ["sources"], "limit_at_least": 500},
+        {"name": "get_event_detail", "count_at_least": 1}
+      ],
+      "content_checks": [
+        "\"People affected/impacted\" is ambiguous against this API (min_deaths and min_displaced are the only threshold filters; there's no single 'impacted' metric) -- response should either clarify what metric it's ranking by (deaths vs. displaced vs. total affected) or transparently state which one it chose, not silently pick one without saying so",
+        "Events are presented in ranked order with the metric used for ranking stated explicitly",
+        "Does not state precise casualty/impact figures without having called get_event_detail or search_impacts to back them"
+      ]
+    }
+  },
+  {
+    "name": "ambiguous-hazard-storm-clarification",
+    "input": "What storm events have happened in the Philippines recently?",
+    "additional_metadata": {
+      "verified": false,
+      "grounded_in": "skills/hazard_codes.py docstring instructs asking the user to clarify ambiguous hazard terms before querying. taxonomy.json has 6 plausible matches for 'storm' (MH0102, MH0103, MH0201, MH0406, MH0703, MH0704), none of which is Tropical Cyclone.",
+      "tool_checks": [
+        {"name": "hazard_codes", "count": 1},
+        {"name": "search_events", "count": 0}
+      ],
+      "content_checks": [
+        "Asks a clarifying question about which type of storm (e.g. thunderstorm, tropical cyclone, storm surge) before running a search",
+        "Does not silently guess a single hazard code for 'storm'"
+      ]
+    }
+  },
+  {
+    "name": "hazard-code-reuse-across-turns",
+    "input": "What floods have hit Bangladesh recently?",
+    "additional_metadata": {
+      "verified": false,
+      "grounded_in": "app.py SYSTEM_PROMPT: 'only call hazard_codes() once per conversation and reuse the undrr_code you already resolved... don't call hazard_codes() again just because the user mentions flooding again later.'",
+      "turns": [
+        "What floods have hit Bangladesh recently?",
+        "What about floods in Pakistan?"
+      ],
+      "turn_tool_checks": [
+        [
+          {"name": "hazard_codes", "count": 1},
+          {"name": "search_events", "args_present": {"hazard_code": "MH0600", "country_code": "BGD"}}
+        ],
+        [
+          {"name": "hazard_codes", "count": 0},
+          {"name": "search_events", "args_present": {"hazard_code": "MH0600", "country_code": "PAK"}}
+        ]
+      ]
+    }
+  },
+  {
+    "name": "explicit-source-restriction",
+    "input": "Using only EM-DAT, what floods happened in Bangladesh in 2024?",
+    "additional_metadata": {
+      "verified": false,
+      "grounded_in": "app.py SYSTEM_PROMPT and search_events()'s docstring both say sources= should only be used when the user explicitly names one -- positive control case.",
+      "tool_checks": [
+        {"name": "search_events", "args_present": {"sources": ["emdat"]}}
+      ],
+      "content_checks": [
+        "States that results are limited to EM-DAT only, per the user's request"
+      ]
+    }
+  },
+  {
+    "name": "idmc-displacement-omits-hazard-code",
+    "input": "How many people were displaced by disasters in Somalia in 2023?",
+    "additional_metadata": {
+      "verified": false,
+      "grounded_in": "app.py SYSTEM_PROMPT Limitations section: 'For IDMC displacement queries, omit hazard_code -- IDMC tags records with a generic code that won't match specific hazards, silently excluding them.' skills/search_impacts.py:73 uses `if hazard_code:`, so an empty string is functionally identical to omitting the key -- checking for the literal absence of the JSON key (rather than a falsy value) was an eval-design bug, not an app bug.",
+      "tool_checks": [
+        {"name": "search_impacts", "args_present": {"country_code": "SOM"}, "args_present_keys": ["min_displaced"], "args_falsy": ["hazard_code"]}
+      ],
+      "content_checks": [
+        "States which source(s) the displacement figures came from (expect idmc-gidd and/or idmc-idu)"
+      ]
+    }
+  },
+  {
+    "name": "implausible-event-empty-results-honesty",
+    "input": "What magnitude 8+ earthquakes hit Iceland in 2022?",
+    "additional_metadata": {
+      "verified": false,
+      "grounded_in": "app.py Response guidelines: 'If results are empty or sparse, say so explicitly -- do not speculate about real-world events.' This scenario is deliberately implausible (Iceland is not a major M8+ seismic zone) so results should be empty or near-empty.",
+      "tool_checks": [
+        {"name": "hazard_codes", "count": 1},
+        {"name": "search_events", "args_present": {"country_code": "ISL"}, "args_falsy": ["sources"]}
+      ],
+      "content_checks": [
+        "If no matching events are found, states this explicitly rather than fabricating or speculating about an earthquake that isn't in the results",
+        "Does not invent a magnitude, death toll, or date not present in tool output"
+      ]
+    }
+  },
+  {
+    "name": "cross-source-corr-id-lookup",
+    "input": "Which data sources have information on the 2015 Nepal earthquake?",
+    "additional_metadata": {
+      "verified": false,
+      "grounded_in": "CLAUDE.md data model: monty:corr_id is deterministic PER SOURCE, not shared across sources -- the same real-world event can appear once per source, each with its own corr_id, and cross-source dedup is only partially piloted (earthquakes/floods). So a single get_event_detail(corr_id) call reflects one source's record, not automatically every source's. The 2015 Nepal earthquake (Gorkha) is real-world common knowledge and EM-DAT/USGS have historical global coverage, so it is reasonable to expect multiple source records exist -- but the exact source list/corr_ids are NOT verified against live Montandon data this session.",
+      "tool_checks": [
+        {"name": "hazard_codes", "count": 1},
+        {"name": "search_events", "args_present": {"country_code": "NPL", "hazard_code": "GH0101"}},
+        {"name": "get_event_detail", "count_at_least": 1}
+      ],
+      "content_checks": [
+        "Names which specific sources contributed data for this event, not just a generic 'multiple sources'",
+        "Does not claim more sources than the tool results actually returned",
+        "Does not treat a single corr_id/get_event_detail lookup as proof of full cross-source coverage -- since corr_id is deterministic per source (not shared across sources) and cross-source dedup is only partially in place, the response should reflect that each source's record may need its own corr_id lookup, not assume one call surfaced every source"
+      ]
+    }
+  }
+]

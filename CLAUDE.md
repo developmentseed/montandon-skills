@@ -42,7 +42,7 @@ ingestion lags, so an event absent from one source may be fully documented in an
 ## Data model
 
 - Three item types per source: `*-events`, `*-hazards`, `*-impacts`
-- `monty:corr_id` pairs all items for the same real-world event **across sources** — `get_event_detail` uses it to fetch hazards and impacts from every source in one call
+- `monty:corr_id` is deterministic **per source**, not a cross-source join key — two sources describing the same real-world event can produce different corr_ids (country resolution, hazard normalization, block_id, or episode number can differ). `get_event_detail` queries hazards/impacts across all source collections by exact corr_id match, so it reliably returns everything chained to *that* corr_id, but may miss another source's record of the same event if that source generated a different corr_id
 - Impact rows are typed (`death`, `displaced_total`, etc.) — multiple rows per event is normal
 - EM-DAT cost values are in **thousands of USD** — always multiply × 1,000 when presenting
 
