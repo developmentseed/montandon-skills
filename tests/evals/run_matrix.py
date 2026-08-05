@@ -80,7 +80,13 @@ async def run_multi_turn(case: dict, model: str, semaphore: asyncio.Semaphore) -
 
     all_failures = []
     wall_time_s = 0.0
-    usage = {"cost_usd": 0.0, "prompt_tokens": 0, "completion_tokens": 0}
+    usage = {
+        "cost_usd": 0.0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+    }
 
     async with semaphore:
         messages = [{"role": "system", "content": app.SYSTEM_PROMPT}]
@@ -112,6 +118,8 @@ def _row(name, model, tool_pass, tool_failures, content_score, content_success,
         "cost_usd": round(usage["cost_usd"], 6),
         "prompt_tokens": usage["prompt_tokens"],
         "completion_tokens": usage["completion_tokens"],
+        "cached_tokens": usage["cached_tokens"],
+        "cache_write_tokens": usage["cache_write_tokens"],
     }
 
 
@@ -135,6 +143,7 @@ def print_detail_table(console: Console, rows: list[dict]):
     table.add_column("Content")
     table.add_column("Wall time")
     table.add_column("Cost")
+    table.add_column("Cache hit%")
     for row in sorted(rows, key=lambda r: (r["model"], r["case"])):
         tools_cell = "✓" if row["tool_pass"] else f"✗ {row['tool_failures'][0][:40]}…" if row["tool_failures"] else "✗"
         if row["content_score"] is not None:
@@ -143,9 +152,12 @@ def print_detail_table(console: Console, rows: list[dict]):
             content_cell = f"error: {row['content_error'][:30]}"
         else:
             content_cell = "—"
+        cached = row.get("cached_tokens", 0)
+        prompt = row["prompt_tokens"]
+        cache_cell = f"{cached / prompt:.0%}" if prompt else "—"
         table.add_row(
             row["model"], row["case"], tools_cell, content_cell,
-            f"{row['wall_time_s']:.1f}s", f"${row['cost_usd']:.4f}",
+            f"{row['wall_time_s']:.1f}s", f"${row['cost_usd']:.4f}", cache_cell,
         )
     console.print(table)
 
@@ -157,6 +169,7 @@ def print_summary_table(console: Console, rows: list[dict]):
     table.add_column("Avg content score")
     table.add_column("Total wall time")
     table.add_column("Total cost")
+    table.add_column("Cache hit%")
 
     models = sorted({r["model"] for r in rows})
     for model in models:
@@ -166,12 +179,15 @@ def print_summary_table(console: Console, rows: list[dict]):
         avg_content = sum(content_scores) / len(content_scores) if content_scores else None
         total_wall = sum(r["wall_time_s"] for r in model_rows)
         total_cost = sum(r["cost_usd"] for r in model_rows)
+        total_cached = sum(r.get("cached_tokens", 0) for r in model_rows)
+        total_prompt = sum(r["prompt_tokens"] for r in model_rows)
         table.add_row(
             model,
             f"{pass_rate:.0%} ({sum(r['overall_pass'] for r in model_rows)}/{len(model_rows)})",
             f"{avg_content:.2f}" if avg_content is not None else "—",
             f"{total_wall:.1f}s",
             f"${total_cost:.4f}",
+            f"{total_cached / total_prompt:.0%}" if total_prompt else "—",
         )
     console.print(table)
 

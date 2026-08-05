@@ -307,7 +307,13 @@ async def run_agent(messages: list[dict], model: str = MODEL, on_tool_call=None)
     just correctness.
     """
     tool_call_log = []
-    usage = {"cost_usd": 0.0, "prompt_tokens": 0, "completion_tokens": 0}
+    usage = {
+        "cost_usd": 0.0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+    }
     start = time.perf_counter()
 
     while True:
@@ -321,6 +327,10 @@ async def run_agent(messages: list[dict], model: str = MODEL, on_tool_call=None)
             usage["cost_usd"] += getattr(response.usage, "cost", 0.0) or 0.0
             usage["prompt_tokens"] += response.usage.prompt_tokens or 0
             usage["completion_tokens"] += response.usage.completion_tokens or 0
+            details = getattr(response.usage, "prompt_tokens_details", None)
+            if details is not None:
+                usage["cached_tokens"] += getattr(details, "cached_tokens", 0) or 0
+                usage["cache_write_tokens"] += getattr(details, "cache_write_tokens", 0) or 0
         assistant = response.choices[0].message
 
         assistant_dict = {"role": "assistant", "content": assistant.content}
