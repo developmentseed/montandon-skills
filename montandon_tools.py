@@ -7,6 +7,8 @@ from skills.search_events import search_events
 from skills.get_event_detail import get_event_detail
 from skills.search_impacts import search_impacts
 from skills.list_sources import list_sources
+from skills.search_reliefweb_disasters import search_reliefweb_disasters
+from skills.search_reliefweb_reports import search_reliefweb_reports
 
 __all__ = [
     "hazard_codes",
@@ -14,4 +16,6 @@ __all__ = [
     "get_event_detail",
     "search_impacts",
     "list_sources",
+    "search_reliefweb_disasters",
+    "search_reliefweb_reports",
 ]
