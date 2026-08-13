@@ -1,0 +1,36 @@
+# systemd unit for the Montandon Chainlit app.
+#
+# Setup (Ubuntu/Debian): see deploy/README.md for the full walkthrough
+# (creating the askmonty user, deploying the code, installing uv). Once
+# that's done:
+#
+#   sudo cp deploy/montandon-chainlit.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now montandon-chainlit
+#   sudo systemctl status montandon-chainlit
+#   sudo journalctl -u montandon-chainlit -f
+
+[Unit]
+Description=Montandon Chainlit app
+After=network.target
+
+[Service]
+Type=simple
+User=askmonty
+Group=askmonty
+WorkingDirectory=/home/askmonty/montandon-skills
+ExecStart=/home/askmonty/.local/bin/uv run --env-file .env chainlit run app.py --port 8300
+Restart=on-failure
+RestartSec=5
+
+# Sandboxing: the service can only write inside askmonty's home (repo,
+# uv cache, chainlit's local data/upload dirs all live there); everything
+# else on the system is read-only or invisible to it.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/askmonty
+
+[Install]
+WantedBy=multi-user.target
