@@ -1,8 +1,8 @@
 # Deploying ask.montandondata.org
 
-The Chainlit app runs standalone (`uv run --env-file .env chainlit run app.py`,
-listening on `127.0.0.1:8000` by default). Nginx sits in front as a reverse proxy
-and terminates TLS via certbot.
+The Chainlit app runs standalone on port 8300 (chosen to avoid clashing with other
+services on the box). Nginx sits in front as a reverse proxy and terminates TLS
+via certbot.
 
 ## One-time server setup
 
@@ -22,5 +22,5 @@ Process management isn't included here — run it however you're already running
 (tmux, nohup, etc.):
 
 ```bash
-uv run --env-file .env chainlit run app.py
+uv run --env-file .env chainlit run app.py --port 8300
 ```
