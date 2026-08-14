@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 .venv/
 .chainlit
+.deepeval
+tests/evals

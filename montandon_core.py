@@ -9,7 +9,7 @@ from typing import Optional
 
 import requests
 
-BASE_URL = "https://montandon-eoapi-stage.ifrc.org/stac"
+BASE_URL = os.environ.get("MONTANDON_BASE_URL")
 
 
 # ---------------------------------------------------------------------------
