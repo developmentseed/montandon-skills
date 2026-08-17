@@ -11,7 +11,7 @@ from skills.list_sources import list_sources
 from skills.search_events import search_events
 from skills.search_impacts import search_impacts
 
-MODEL = os.getenv("OPENROUTER_MODEL", "deepseek/deepseek-v4-pro")
+MODEL = os.getenv("OPENROUTER_MODEL", "deepseek/deepseek-v4-flash")
 
 client = AsyncOpenAI(
     api_key=os.getenv("OPENROUTER_API_KEY") or "not-set",
