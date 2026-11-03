@@ -2,8 +2,8 @@
 Fetch full detail for a single disaster event: metadata, hazards, and impacts.
 """
 from montandon_core import (
-    _eq, _post_search, _trim_event_detail, _trim_hazard, _trim_impact,
-    _colls_by_type, _EVENT_DETAIL_FIELDS, _HAZARD_FIELDS, _IMPACT_FIELDS,
+    _eq, _post_search, _trim_event_detail, _trim_hazard, _trim_impact, _trim_response,
+    _colls_by_type, _EVENT_DETAIL_FIELDS, _HAZARD_FIELDS, _IMPACT_FIELDS, _RESPONSE_FIELDS,
 )
 
 
@@ -19,15 +19,19 @@ def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
 
     Returns:
         Dict with keys:
-          event:    trimmed event dict (from the specified or first-found source), including
-                    the full, untruncated source description
-          hazards:  list of trimmed hazard dicts across all sources (may be empty)
-          impacts:  list of trimmed impact dicts across all sources (each is one typed estimate row)
+          event:     trimmed event dict (from the specified or first-found source), including
+                     the full, untruncated source description
+          hazards:   list of trimmed hazard dicts across all sources (may be empty)
+          impacts:   list of trimmed impact dicts across all sources (each is one typed estimate row)
+          responses: list of trimmed response dicts across all sources (may be empty — only
+                     'cems' and 'charter' currently publish response items). A response is an
+                     action taken or product produced (a CEMS grading map, a Charter VAP) —
+                     NOT an impact estimate; don't fold these into an impact summary.
 
     Note:
         monty:corr_id pairs all items for the same real-world event across sources.
-        Hazards and impacts are returned from ALL sources, not just the event's source —
-        use the 'collection' field on each row to identify its origin.
+        Hazards, impacts, and responses are returned from ALL sources, not just the event's
+        source — use the 'collection' field on each row to identify its origin.
         Group impacts by impact_type to summarise; EM-DAT 'cost' rows are thousands of USD.
     """
     event_colls = (
@@ -82,8 +86,26 @@ def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
         except Exception:
             pass
 
+    response_colls = _colls_by_type("-response")
+    responses = []
+    if response_colls:
+        try:
+            responses = [
+                _trim_response(it)
+                for it in _post_search({
+                    "collections": response_colls,
+                    "filter-lang": "cql2-json",
+                    "filter": _eq("monty:corr_id", corr_id),
+                    "limit": 50,
+                    "fields": _RESPONSE_FIELDS,
+                }).get("features", [])
+            ]
+        except Exception:
+            pass
+
     return {
         "event": _trim_event_detail(feats[0]),
         "hazards": hazards,
         "impacts": impacts,
+        "responses": responses,
     }
