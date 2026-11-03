@@ -45,9 +45,8 @@ ingestion lags, so an event absent from one source may be fully documented in an
 
 - Three item types per source: `*-events`, `*-hazards`, `*-impacts`. A 4th type, `*-response`,
   exists for `cems` and `charter` — it represents an action taken or product produced (a CEMS
-  grading map, a Charter VAP), not an impact estimate. `get_event_detail` does **not** fetch
-  response items yet — if a user asks about response/EO/monitoring activity for an event, say so
-  rather than silently omitting it.
+  grading map, a Charter VAP), not an impact estimate. `get_event_detail` fetches response items
+  too (`result["responses"]`), but keep them out of any impact summary.
 - `monty:corr_id` pairs all items for the same real-world event **across sources** — `get_event_detail` uses it to fetch hazards and impacts from every source in one call
 - Impact rows are typed (`death`, `displaced_total`, etc.) — multiple rows per event is normal
 - EM-DAT cost values are in **thousands of USD** — always multiply × 1,000 when presenting

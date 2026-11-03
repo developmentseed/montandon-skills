@@ -173,6 +173,26 @@ def _trim_hazard(item: dict) -> dict:
     }
 
 
+def _trim_response(item: dict) -> dict:
+    """A response is an action taken or product produced (CEMS map, Charter VAP) — not an impact estimate."""
+    p = item.get("properties", {})
+    detail = p.get("monty:response_detail", {})
+    return {
+        "id": item.get("id"),
+        "collection": item.get("collection"),
+        "corr_id": p.get("monty:corr_id"),
+        "date": p.get("datetime") or p.get("start_datetime"),
+        "hazard_codes": p.get("monty:hazard_codes", []),
+        "response_type": detail.get("type"),
+        "source_id": detail.get("source_id"),
+        "status": detail.get("status"),
+        "producer": detail.get("producer"),
+        "methodology": detail.get("methodology"),
+        "sendai_targets": detail.get("sendai_targets"),
+        "sectors": detail.get("sectors"),
+    }
+
+
 # ---------------------------------------------------------------------------
 # STAC fields extension — server-side payload trimming (~95% size reduction)
 # ---------------------------------------------------------------------------
@@ -208,6 +228,16 @@ _HAZARD_FIELDS: dict = {
         "properties.datetime", "properties.start_datetime",
         "properties.monty:corr_id", "properties.monty:hazard_codes",
         "properties.monty:hazard_detail",
+    ],
+    "exclude": ["geometry", "assets", "links", "bbox"],
+}
+
+_RESPONSE_FIELDS: dict = {
+    "include": [
+        "id", "collection",
+        "properties.datetime", "properties.start_datetime",
+        "properties.monty:corr_id", "properties.monty:hazard_codes",
+        "properties.monty:response_detail",
     ],
     "exclude": ["geometry", "assets", "links", "bbox"],
 }
