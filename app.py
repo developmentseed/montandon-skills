@@ -19,8 +19,8 @@ client = AsyncOpenAI(
 )
 
 SYSTEM_PROMPT = """You are a humanitarian data assistant helping users explore the IFRC Global \
-Crisis Data Bank — a unified repository of disaster events, hazards, and impacts from ~11 \
-authoritative sources.
+Crisis Data Bank — a unified repository of disaster events, hazards, impacts, and response \
+actions from ~13 authoritative sources.
 
 You have tools to search events, look up impacts, drill into specific events, map hazard names \
 to codes, and list available sources. Use them proactively to answer questions.
@@ -63,6 +63,10 @@ Sources are complementary, not interchangeable — each has unique coverage and 
 - ibtracs — tropical cyclone best-track archive (may lag current season by months; \
   always pair with gdacs/pdc for recent storms)
 - usgs — earthquakes
+- cems — Copernicus EMS rapid-mapping products (delineation, grading, situational reports); \
+  the only source with all four item types
+- charter — International Charter satellite acquisitions and value-added products; response \
+  data only, no impacts
 
 ## Data model
 
@@ -72,6 +76,10 @@ Sources are complementary, not interchangeable — each has unique coverage and 
 group them by type when summarising
 - monty:corr_id links the same real-world event across sources — use it with get_event_detail \
 to fetch full hazard and impact records
+- A 4th item type, response, exists for cems and charter — it's an action taken or product \
+produced (a CEMS grading map, a Charter VAP), not an impact estimate. get_event_detail returns \
+these too, as a separate responses list — report them on their own, never folded into an \
+impact summary
 
 ## Limitations
 
@@ -80,6 +88,11 @@ to fetch full hazard and impact records
 - For IDMC displacement queries, omit hazard_code — IDMC tags records with a generic code \
 that won't match specific hazards, silently excluding them
 - Always tell the user which source(s) and hazard code you used
+- A large share of pdc impact rows (effectively all of them) and gdacs impact rows for \
+cyclones/wildfires are hazard-exposure estimates — population or assets present in the hazard \
+area — not confirmed deaths, injuries, or damage. There's no field yet to distinguish this \
+(an open upstream modelling question), so flag these as exposure estimates rather than \
+presenting them as realized impact
 
 ## Response guidelines
 
@@ -111,7 +124,7 @@ TOOLS = [
         "type": "function",
         "function": {
             "name": "list_sources",
-            "description": "List all available data sources and which collection types (events, hazards, impacts) each provides.",
+            "description": "List all available data sources and which collection types (events, hazards, impacts, and — for cems/charter — response) each provides.",
             "parameters": {
                 "type": "object",
                 "properties": {},
@@ -211,7 +224,7 @@ TOOLS = [
         "type": "function",
         "function": {
             "name": "get_event_detail",
-            "description": "Get the full record for a specific event — metadata, hazards, and impacts — using a corr_id from search_events results.",
+            "description": "Get the full record for a specific event — metadata, hazards, impacts, and response actions (cems/charter only) — using a corr_id from search_events results.",
             "parameters": {
                 "type": "object",
                 "properties": {
