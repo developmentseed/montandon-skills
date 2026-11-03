@@ -1,6 +1,7 @@
 # list_sources
 
-Show available data sources and which collection types each has (events, hazards, impacts).
+Show available data sources and which collection types each has (events, hazards, impacts,
+and — for `cems`/`charter` — response).
 
 Call this when:
 - The user asks what data is available

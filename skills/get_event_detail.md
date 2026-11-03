@@ -23,6 +23,10 @@ Full record for one event: metadata plus all cross-source hazards and impacts.
 - Group `impacts` by `impact_type` to summarise per event
 - EM-DAT `cost` rows are in **thousands of USD** — multiply × 1,000 when presenting
 - Empty `hazards` or `impacts` is normal — not all sources populate all three collection types
+- **Known gap:** this skill does not fetch `*-response` items (CEMS/Charter EO products — maps,
+  damage grading, situational reports). If a user asks about response or monitoring activity for
+  an event, say this data isn't covered yet rather than reporting none exists — use
+  `list_sources` to check whether the event's source (`cems`, `charter`) has a response collection.
 
 ## Note on corr_id semantics
 
