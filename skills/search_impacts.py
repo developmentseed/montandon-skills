@@ -49,14 +49,15 @@ def search_impacts(
     Returns:
         Dict with keys:
           items:                list of trimmed impact dicts (each is one estimate row;
-                                rows for the same event share a corr_id)
+                                rows for the same event in one source share a corr_id)
           total_matched:        total matching records on the server (may exceed len(items))
           sources_queried:      all sources searched
           sources_with_results: sources represented in the returned items
 
     Note:
         Impact figures are per-source estimates. Different sources may report different numbers
-        for the same disaster. This is expected — compare corr_ids to spot duplicates.
+        for the same disaster. This is expected. Don't match them by corr_id: different sources usually
+        give the same disaster different corr_ids. Compare country, hazard and date instead.
         min_deaths and min_displaced cannot be combined in one query (they filter different rows);
         provide one at a time for clarity.
     """
