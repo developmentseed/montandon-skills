@@ -1,6 +1,6 @@
 # get_event_detail
 
-Full record for one event: metadata plus all cross-source hazards, impacts, and responses.
+Full record for one event: metadata plus the hazards, impacts, and responses that share its `corr_id`, from every source collection.
 
 ## Parameters
 
@@ -19,7 +19,7 @@ Full record for one event: metadata plus all cross-source hazards, impacts, and 
 ```
 
 - `event` is the first matching source record (or from `collection` if specified)
-- `hazards`, `impacts`, and `responses` come from **all sources** — each row includes a `collection` field showing its origin. This means you may see the same event's impacts from emdat, idmc, and pdc all in one response.
+- `hazards`, `impacts`, and `responses` are looked up in **all source collections** by `corr_id` — each row includes a `collection` field showing its origin. Another source's rows appear only when that source gave the event the same `corr_id`, which is the exception, so a one-source result does not mean other sources have nothing on the event.
 - Group `impacts` by `impact_type` to summarise per event
 - EM-DAT `cost` rows are in **thousands of USD** — multiply × 1,000 when presenting
 - Empty `hazards`, `impacts`, or `responses` is normal — not all sources populate all four collection types. `responses` will almost always be empty — only `cems` and `charter` currently publish response items.
@@ -27,6 +27,9 @@ Full record for one event: metadata plus all cross-source hazards, impacts, and 
 
 ## Note on corr_id semantics
 
-`monty:corr_id` is a cross-source identifier — it pairs all items (events, hazards, impacts,
-responses) for the same real-world event across sources. This skill queries hazards, impacts,
-and responses across all source collections, not just the collection the event was found in.
+`monty:corr_id` is generated per source from the item's own date, country, grid block, hazard
+code and episode. It ties an event to its own hazards, impacts and responses within that source. It is
+**not** a cross-source join key: two sources describing the same real-world event usually get different
+corr_ids. This skill queries every source collection by the corr_id, but only rows that carry that exact
+value come back. To find the same event in other sources, use `search_events` per source with country,
+hazard code and a date window, and compare the records.

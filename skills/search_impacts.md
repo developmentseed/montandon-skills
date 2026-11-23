@@ -43,7 +43,7 @@ Always report `sources_queried`, `sources_with_results`, and `total_matched` to 
 
 - When `min_deaths` or `min_displaced` is set, results are sorted by impact magnitude (highest first). Use `total_matched` to see how many events met the threshold vs. how many were returned.
 - Without an impact filter, results are in default API order (typically reverse-chronological).
-- Each result row is one impact-type estimate; rows for the same event share a `corr_id`
+- Each result row is one impact-type estimate; rows for the same event within one source share a `corr_id` (another source's record of the same disaster usually has a different one)
 - EM-DAT `cost` values are in **thousands of USD** — multiply × 1,000 when presenting
 - **IDMC hazard codes:** IDMC-GIDD and IDMC-IDU tag records as `mix-mix-mix-mix` rather than
   specific UNDRR codes. Passing `hazard_code=` will silently exclude all IDMC rows. For

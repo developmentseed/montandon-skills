@@ -9,7 +9,8 @@ from montandon_core import (
 
 def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
     """
-    Get full detail for one event: its source record plus all cross-source hazards and impacts.
+    Get full detail for one event: its source record plus the hazards and impacts that share its
+    corr_id, looked up in every source collection.
 
     Args:
         corr_id:    The monty:corr_id from a search_events result, e.g.
@@ -29,9 +30,12 @@ def get_event_detail(corr_id: str, collection: str | None = None) -> dict:
                      NOT an impact estimate; don't fold these into an impact summary.
 
     Note:
-        monty:corr_id pairs all items for the same real-world event across sources.
-        Hazards, impacts, and responses are returned from ALL sources, not just the event's
-        source — use the 'collection' field on each row to identify its origin.
+        monty:corr_id is generated per source and is NOT a cross-source join key: two sources
+        describing the same real-world event usually get different corr_ids. Hazards, impacts,
+        and responses are looked up in ALL source collections, but only rows carrying this exact
+        corr_id come back, so another source's rows appear only when it shares the value — use the
+        'collection' field on each row to identify its origin. To find the same event in other
+        sources, search each by country, hazard code and date window.
         Group impacts by impact_type to summarise; EM-DAT 'cost' rows are thousands of USD.
     """
     event_colls = (

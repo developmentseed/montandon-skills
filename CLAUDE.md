@@ -47,7 +47,7 @@ ingestion lags, so an event absent from one source may be fully documented in an
   exists for `cems` and `charter` — it represents an action taken or product produced (a CEMS
   grading map, a Charter VAP), not an impact estimate. `get_event_detail` fetches response items
   too (`result["responses"]`), but keep them out of any impact summary.
-- `monty:corr_id` pairs all items for the same real-world event **across sources** — `get_event_detail` uses it to fetch hazards and impacts from every source in one call
+- `monty:corr_id` is generated per source: it ties an event to its own hazards, impacts and responses, and is **not** a cross-source join key (two sources describing one event usually get different corr_ids). `get_event_detail` queries every source collection by that corr_id, so it returns another source's rows only when they share it. To find the same event in other sources, search each by country, hazard and date window and compare the records
 - Impact rows are typed (`death`, `displaced_total`, etc.) — multiple rows per event is normal
 - EM-DAT cost values are in **thousands of USD** — always multiply × 1,000 when presenting
 

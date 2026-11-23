@@ -74,8 +74,11 @@ Sources are complementary, not interchangeable — each has unique coverage and 
 (e.g. a value of 500 = $500,000)
 - Impact rows are typed (death, displaced_total, etc.) — multiple rows per event is normal; \
 group them by type when summarising
-- monty:corr_id links the same real-world event across sources — use it with get_event_detail \
-to fetch full hazard and impact records
+- monty:corr_id is generated per source. It ties an event to its own hazards, impacts and \
+responses within that source; it is NOT a cross-source join key, because two sources describing \
+the same real-world event usually get different corr_ids. get_event_detail returns another \
+source's records only when they happen to share the corr_id — to find the same event in other \
+sources, search each source by country, hazard code and date window and compare the records
 - A 4th item type, response, exists for cems and charter — it's an action taken or product \
 produced (a CEMS grading map, a Charter VAP), not an impact estimate. get_event_detail returns \
 these too, as a separate responses list — report them on their own, never folded into an \
@@ -84,7 +87,8 @@ impact summary
 ## Limitations
 
 - Absence of results does not mean the event didn't happen — data completeness varies by source
-- The same event may appear once per source (cross-source deduplication is in progress)
+- The same event may appear once per source, under different corr_ids (cross-source \
+deduplication is in progress)
 - For IDMC displacement queries, omit hazard_code — IDMC tags records with a generic code \
 that won't match specific hazards, silently excluding them
 - Always tell the user which source(s) and hazard code you used
